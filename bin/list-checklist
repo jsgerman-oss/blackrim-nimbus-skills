@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+// Print the verification checklist for a plugin (or a specific skill) as
+// structured data. Lets CI, gt commands, or downstream agents consume the
+// list without parsing markdown themselves.
+//
+// Usage:
+//   bin/list-checklist <plugin>                    # all skills in a plugin
+//   bin/list-checklist <plugin> <skill>            # one skill
+//   bin/list-checklist <plugin> --json             # JSON output
+//   bin/list-checklist <plugin> <skill> --json
+
+import { readdirSync, existsSync, readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { parseChecklist } from "./lib/skill.js";
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const args = process.argv.slice(2);
+const json = args.includes("--json");
+const positional = args.filter((a) => !a.startsWith("--"));
+
+if (positional.length === 0) {
+  console.error("usage: list-checklist <plugin> [skill] [--json]");
+  console.error("       <plugin> is the directory name (e.g. cloud-aws)");
+  console.error("       <skill> is the skill slug (e.g. aws-compute)");
+  process.exit(2);
+}
+
+const [pluginName, skillSlug] = positional;
+const pluginDir = join(repoRoot, pluginName);
+if (!existsSync(pluginDir)) {
+  console.error(`error: plugin '${pluginName}' not found at ${pluginDir}`);
+  process.exit(2);
+}
+
+const skillsDir = join(pluginDir, "skills");
+const skillsToList = skillSlug
+  ? [skillSlug]
+  : readdirSync(skillsDir).filter((f) => !f.startsWith("."));
+
+const out = {};
+for (const slug of skillsToList) {
+  const path = join(skillsDir, slug, "SKILL.md");
+  if (!existsSync(path)) {
+    console.error(`warn: ${slug}/SKILL.md not found`);
+    continue;
+  }
+  out[slug] = parseChecklist(readFileSync(path, "utf8"));
+}
+
+if (json) {
+  console.log(JSON.stringify(out, null, 2));
+} else {
+  for (const [slug, items] of Object.entries(out)) {
+    console.log(`# ${slug} (${items.length} items)`);
+    for (const item of items) {
+      const mark = item.checked ? "x" : " ";
+      console.log(`- [${mark}] ${item.text}`);
+    }
+    console.log("");
+  }
+}

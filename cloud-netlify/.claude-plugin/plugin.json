@@ -1,0 +1,22 @@
+{
+  "name": "cloud-netlify",
+  "description": "Netlify development toolkit — Builds, Edge Functions, Functions (background / scheduled), Blobs, Forms, Identity, redirects, and Deploy Previews.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "netlify",
+    "jamstack",
+    "edge-functions",
+    "functions",
+    "blobs",
+    "forms",
+    "identity",
+    "redirects",
+    "deploy-previews",
+    "build-plugins"
+  ],
+  "prefix": "netlify"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "cloud-azure",
+  "description": "Microsoft Azure development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "azure",
+    "microsoft-azure",
+    "aks",
+    "azure-functions",
+    "container-apps",
+    "cosmos-db",
+    "entra-id",
+    "bicep",
+    "well-architected",
+    "azure-openai"
+  ],
+  "prefix": "azure"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "cloud-linode",
+  "description": "Linode (Akamai Cloud Computing) toolkit — Compute Instances, LKE Kubernetes, Object Storage, Managed Databases, NodeBalancer, VLAN, and Cloud Firewalls.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "linode",
+    "akamai",
+    "lke",
+    "kubernetes",
+    "object-storage",
+    "managed-database",
+    "nodebalancer",
+    "vlan",
+    "cloud-firewall",
+    "terraform"
+  ],
+  "prefix": "linode"
+}

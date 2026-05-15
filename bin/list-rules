@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+// Print the validator rule registry as a table. Useful for contributors who
+// want to know what `npm run check` enforces without reading 247 lines of
+// validator code.
+//
+// Usage:
+//   bin/list-rules           # plain text
+//   bin/list-rules --json    # JSON output
+//   bin/list-rules --md      # markdown table (for embedding in docs)
+
+import { rules } from "./lib/rules.js";
+
+const args = process.argv.slice(2);
+if (args.includes("--json")) {
+  console.log(JSON.stringify(rules.map(({ id, scope, severity, description }) => ({ id, scope, severity, description })), null, 2));
+} else if (args.includes("--md")) {
+  console.log("| Rule | Scope | Severity | Description |");
+  console.log("| --- | --- | --- | --- |");
+  for (const r of rules) {
+    console.log(`| \`${r.id}\` | ${r.scope} | ${r.severity} | ${r.description.replace(/\|/g, "\\|")} |`);
+  }
+} else {
+  const idW = Math.max(...rules.map((r) => r.id.length));
+  const scopeW = Math.max(...rules.map((r) => r.scope.length));
+  const sevW = Math.max(...rules.map((r) => r.severity.length));
+  for (const r of rules) {
+    console.log(`${r.id.padEnd(idW)}  ${r.scope.padEnd(scopeW)}  ${r.severity.padEnd(sevW)}  ${r.description}`);
+  }
+  console.log(`\n${rules.length} rules.`);
+}

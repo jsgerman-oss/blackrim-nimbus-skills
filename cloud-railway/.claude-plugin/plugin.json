@@ -1,0 +1,22 @@
+{
+  "name": "cloud-railway",
+  "description": "Railway development toolkit — Services, Volumes, Plugins, Environments, Templates, Cron Jobs, observability, and PR preview deployments.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "railway",
+    "railway-app",
+    "service",
+    "volume",
+    "plugin",
+    "environment",
+    "template",
+    "preview-env",
+    "cron",
+    "metrics"
+  ],
+  "prefix": "railway"
+}

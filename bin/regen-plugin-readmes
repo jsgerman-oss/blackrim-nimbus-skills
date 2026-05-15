@@ -1,0 +1,101 @@
+#!/usr/bin/env node
+// Regenerate each cloud-*/README.md's managed "What's inside" region from
+// on-disk skills, agents, and commands.
+//
+// First run is a bootstrap: finds the existing `## What's inside` section
+// (if any), wraps it with markers, and replaces its body with the regen
+// output. Subsequent runs only update the body between markers.
+//
+// Run via `npm run regen:plugin-readmes`.
+
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
+import { join, dirname, relative, basename } from "node:path";
+import { fileURLToPath } from "node:url";
+import { loadPluginManifests } from "./lib/marketplace.js";
+import { readMarkdown } from "./lib/skill.js";
+import {
+  BEGIN_MARKER,
+  END_MARKER,
+  buildPluginReadmeRegionContent,
+} from "./lib/plugin-readme.js";
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+function listDir(path) {
+  if (!existsSync(path)) return [];
+  return readdirSync(path).filter((f) => !f.startsWith("."));
+}
+
+function pluginShape(dir, manifest) {
+  const skillsDir = join(dir, "skills");
+  const skills = listDir(skillsDir)
+    .filter((s) => existsSync(join(skillsDir, s, "SKILL.md")))
+    .map((slug) => ({ slug, path: join(skillsDir, slug, "SKILL.md") }));
+  const agents = listDir(join(dir, "agents"))
+    .filter((f) => f.endsWith(".md"))
+    .map((filename) => ({ filename, path: join(dir, "agents", filename) }));
+  const commands = listDir(join(dir, "commands"))
+    .filter((f) => f.endsWith(".md"))
+    .map((filename) => ({ filename, path: join(dir, "commands", filename) }));
+  return { manifest, dir, skills, agents, commands };
+}
+
+function rewriteReadme(readmePath, expectedContent) {
+  const raw = existsSync(readmePath) ? readFileSync(readmePath, "utf8") : "";
+  const begin = raw.indexOf(BEGIN_MARKER);
+  const end = raw.indexOf(END_MARKER);
+
+  let next;
+  if (begin !== -1 && end !== -1 && end > begin) {
+    // Replace content between markers (incremental update path).
+    next = raw.slice(0, begin + BEGIN_MARKER.length)
+      + "\n" + expectedContent + "\n"
+      + raw.slice(end);
+  } else {
+    // Bootstrap: find existing `## What's inside` section and wrap it.
+    const lines = raw.split("\n");
+    let sectionStart = -1;
+    let sectionEnd = lines.length;
+    for (let i = 0; i < lines.length; i++) {
+      if (/^##\s+What's inside\s*$/.test(lines[i])) { sectionStart = i; break; }
+    }
+    if (sectionStart === -1) {
+      // No section found — insert after the first paragraph (title + tagline).
+      let insertAt = 0;
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].trim() === "" && i > 0) { insertAt = i + 1; break; }
+      }
+      const before = lines.slice(0, insertAt).join("\n");
+      const after = lines.slice(insertAt).join("\n");
+      next = `${before}\n${BEGIN_MARKER}\n${expectedContent}\n${END_MARKER}\n\n${after}`;
+    } else {
+      for (let i = sectionStart + 1; i < lines.length; i++) {
+        if (/^##\s+/.test(lines[i])) { sectionEnd = i; break; }
+      }
+      const before = lines.slice(0, sectionStart).join("\n");
+      const after = lines.slice(sectionEnd).join("\n");
+      next = `${before}\n${BEGIN_MARKER}\n${expectedContent}\n${END_MARKER}\n\n${after}`;
+    }
+  }
+
+  // Normalize trailing whitespace.
+  next = next.replace(/[ \t]+$/gm, "").replace(/\n{3,}/g, "\n\n");
+  if (!next.endsWith("\n")) next += "\n";
+
+  if (raw === next) return false;
+  writeFileSync(readmePath, next);
+  return true;
+}
+
+const plugins = loadPluginManifests(repoRoot);
+let changed = 0;
+for (const { dir, manifest } of plugins) {
+  const shape = pluginShape(dir, manifest);
+  const expected = buildPluginReadmeRegionContent(shape);
+  const readmePath = join(dir, "README.md");
+  if (rewriteReadme(readmePath, expected)) {
+    console.log(`wrote ${relative(repoRoot, readmePath)}`);
+    changed++;
+  }
+}
+console.log(`done. ${changed} READMEs updated.`);

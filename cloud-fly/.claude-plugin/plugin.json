@@ -1,0 +1,23 @@
+{
+  "name": "cloud-fly",
+  "description": "Fly.io development toolkit — Machines, Apps, Volumes, Postgres, Redis, networking, anycast, scale-to-zero, and global multi-region deployments.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "fly",
+    "fly-io",
+    "machines",
+    "apps",
+    "fly-postgres",
+    "fly-volumes",
+    "anycast",
+    "wireguard",
+    "flyctl",
+    "edge",
+    "global-deployment"
+  ],
+  "prefix": "fly"
+}

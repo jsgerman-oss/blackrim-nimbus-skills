@@ -1,0 +1,23 @@
+{
+  "name": "cloud-ibm",
+  "description": "IBM Cloud development toolkit — VPC, Code Engine, IKS / Red Hat OpenShift on IBM Cloud, Cloud Object Storage, Cloudant, IAM, and watsonx services.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ibm-cloud",
+    "vpc",
+    "code-engine",
+    "iks",
+    "openshift",
+    "object-storage",
+    "cloudant",
+    "iam",
+    "watsonx",
+    "terraform",
+    "schematics"
+  ],
+  "prefix": "ibm"
+}

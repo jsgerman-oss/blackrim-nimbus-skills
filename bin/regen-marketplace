@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+// Regenerate .claude-plugin/marketplace.json from each plugin's .claude-plugin/plugin.json.
+// plugin.json is authoritative; marketplace.json is a derived index.
+//
+// Curated order from the existing marketplace.json is preserved; new plugins
+// are appended. Top-level fields (name, owner, metadata) are kept.
+
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { join, dirname, relative } from "node:path";
+import { fileURLToPath } from "node:url";
+import { buildMarketplaceFromPlugins, loadPluginManifests } from "./lib/marketplace.js";
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const marketplacePath = join(repoRoot, ".claude-plugin", "marketplace.json");
+
+const existing = existsSync(marketplacePath)
+  ? JSON.parse(readFileSync(marketplacePath, "utf8"))
+  : {};
+const pluginManifests = loadPluginManifests(repoRoot);
+const next = buildMarketplaceFromPlugins(pluginManifests, existing);
+
+const serialized = JSON.stringify(next, null, 2) + "\n";
+const previous = existsSync(marketplacePath) ? readFileSync(marketplacePath, "utf8") : "";
+if (serialized === previous) {
+  console.log(`ok    ${relative(repoRoot, marketplacePath)} already in sync (${pluginManifests.length} plugins)`);
+  process.exit(0);
+}
+writeFileSync(marketplacePath, serialized);
+console.log(`wrote ${relative(repoRoot, marketplacePath)} (${pluginManifests.length} plugins)`);

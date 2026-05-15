@@ -1,0 +1,23 @@
+{
+  "name": "cloud-gcp",
+  "description": "Google Cloud development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "gcp",
+    "google-cloud",
+    "cloud-run",
+    "gke",
+    "bigquery",
+    "firestore",
+    "spanner",
+    "vertex-ai",
+    "iam",
+    "vpc",
+    "terraform"
+  ],
+  "prefix": "gcp"
+}

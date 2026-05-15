@@ -1,0 +1,29 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-plugins:
+    name: check-plugins
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci --no-audit --no-fund
+      - name: Validate plugin shape, schemas, and frontmatter
+        run: npm run check
+      - name: Verify generated files are in sync
+        run: |
+          npm run regen
+          if ! git diff --quiet; then
+            echo "::error::Generated files are stale. Run 'npm run regen' and commit."
+            git diff
+            exit 1
+          fi

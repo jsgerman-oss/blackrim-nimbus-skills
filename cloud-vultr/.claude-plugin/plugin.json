@@ -1,0 +1,22 @@
+{
+  "name": "cloud-vultr",
+  "description": "Vultr development toolkit — Cloud Compute, Bare Metal, VKE Kubernetes, Object Storage, Managed Databases, Load Balancers, and VPC 2.0.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vultr",
+    "cloud-compute",
+    "bare-metal",
+    "vke",
+    "kubernetes",
+    "object-storage",
+    "managed-database",
+    "load-balancer",
+    "vpc",
+    "terraform"
+  ],
+  "prefix": "vultr"
+}

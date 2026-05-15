@@ -1,0 +1,23 @@
+{
+  "name": "cloud-hetzner",
+  "description": "Hetzner Cloud development toolkit — Hetzner Cloud servers, volumes, networks, load balancers, firewalls, and Robot dedicated infrastructure.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hetzner",
+    "hetzner-cloud",
+    "vps",
+    "dedicated-server",
+    "robot",
+    "volumes",
+    "private-network",
+    "load-balancer",
+    "firewall",
+    "hcloud",
+    "terraform"
+  ],
+  "prefix": "hetzner"
+}

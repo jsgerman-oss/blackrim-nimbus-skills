@@ -1,0 +1,22 @@
+{
+  "name": "cloud-tencent",
+  "description": "Tencent Cloud development toolkit — CVM, TKE Kubernetes, SCF (serverless), COS object storage, TencentDB, VPC, CAM IAM, and CDN. APAC and China-region patterns.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "tencent-cloud",
+    "cvm",
+    "tke",
+    "scf",
+    "cos",
+    "tencentdb",
+    "vpc",
+    "cam",
+    "cdn",
+    "terraform"
+  ],
+  "prefix": "tencent"
+}

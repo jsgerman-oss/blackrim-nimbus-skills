@@ -1,0 +1,24 @@
+{
+  "name": "cloud-alibaba",
+  "description": "Alibaba Cloud development toolkit — ECS, ACK Kubernetes, Function Compute, OSS, RDS / PolarDB, VPC, RAM, ApsaraDB, and CDN. APAC and China-region patterns.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "alibaba-cloud",
+    "aliyun",
+    "ecs",
+    "ack",
+    "function-compute",
+    "oss",
+    "rds",
+    "polardb",
+    "vpc",
+    "ram",
+    "cdn",
+    "terraform"
+  ],
+  "prefix": "alibaba"
+}

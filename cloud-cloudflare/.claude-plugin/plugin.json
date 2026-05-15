@@ -1,0 +1,24 @@
+{
+  "name": "cloud-cloudflare",
+  "description": "Cloudflare development toolkit — Workers, R2, D1, Pages, Zero Trust, and edge networking skills, with SME sub-agents and slash commands.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "r2",
+    "d1",
+    "kv",
+    "durable-objects",
+    "pages",
+    "zero-trust",
+    "edge",
+    "wrangler",
+    "queues",
+    "workers-ai"
+  ],
+  "prefix": "cf"
+}

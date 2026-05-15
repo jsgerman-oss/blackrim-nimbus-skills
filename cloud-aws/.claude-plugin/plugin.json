@@ -1,0 +1,24 @@
+{
+  "name": "cloud-aws",
+  "description": "AWS development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "aws",
+    "cloud",
+    "iac",
+    "well-architected",
+    "lambda",
+    "ec2",
+    "s3",
+    "rds",
+    "dynamodb",
+    "iam",
+    "vpc",
+    "bedrock"
+  ],
+  "prefix": "aws"
+}

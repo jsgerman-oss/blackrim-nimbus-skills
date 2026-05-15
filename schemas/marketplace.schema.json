@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blackrim.dev/schemas/marketplace.schema.json",
+  "title": "Blackrim.dev Nimbus marketplace index",
+  "description": "Top-level .claude-plugin/marketplace.json. Lists every plugin in the marketplace and identifies the marketplace itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "owner", "metadata", "plugins"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Marketplace identifier used by `/plugin install <plugin>@<this name>`.",
+      "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+    },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string", "minLength": 20 }
+      }
+    },
+    "plugins": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/pluginEntry" }
+    }
+  },
+  "$defs": {
+    "pluginEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "source", "description", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^cloud-[a-z][a-z0-9-]*$",
+          "description": "Plugin name. Matches the on-disk directory."
+        },
+        "source": {
+          "type": "string",
+          "pattern": "^\\./cloud-[a-z][a-z0-9-]*$",
+          "description": "Relative path to the plugin directory."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 200
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.-]+)?$"
+        }
+      }
+    }
+  }
+}

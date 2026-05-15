@@ -1,0 +1,27 @@
+{
+  "name": "cloud-scaleway",
+  "description": "Scaleway development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding and architecture review. EU data residency, Kapsule, Serverless Containers, Object Storage, and IAM.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "scaleway",
+    "cloud",
+    "eu",
+    "gdpr",
+    "iac",
+    "kapsule",
+    "kubernetes",
+    "serverless-containers",
+    "serverless-jobs",
+    "instances",
+    "elastic-metal",
+    "object-storage",
+    "managed-database",
+    "iam",
+    "terraform"
+  ],
+  "prefix": "scaleway"
+}

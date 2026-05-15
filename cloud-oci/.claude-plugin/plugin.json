@@ -1,0 +1,23 @@
+{
+  "name": "cloud-oci",
+  "description": "Oracle Cloud Infrastructure development toolkit — Compute, OKE, Object Storage, Autonomous Database, OCI IAM, networking, and observability skills.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "oci",
+    "oracle-cloud",
+    "oke",
+    "kubernetes",
+    "autonomous-database",
+    "object-storage",
+    "compute",
+    "vcn",
+    "iam",
+    "terraform",
+    "resource-manager"
+  ],
+  "prefix": "oci"
+}

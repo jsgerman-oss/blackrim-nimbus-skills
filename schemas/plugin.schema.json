@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blackrim.dev/schemas/plugin.schema.json",
+  "title": "Blackrim.dev Nimbus plugin manifest",
+  "description": "Per-plugin .claude-plugin/plugin.json. Authoritative for plugin metadata; marketplace.json is derived from this.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description", "version", "author", "license", "keywords", "prefix"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^cloud-[a-z][a-z0-9-]*$",
+      "description": "Plugin identifier. Matches the on-disk directory."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 240
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.-]+)?$"
+    },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "license": {
+      "type": "string",
+      "enum": ["MIT"]
+    },
+    "keywords": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$",
+        "minLength": 2
+      }
+    },
+    "prefix": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 2,
+      "maxLength": 16,
+      "description": "Slug prefix used by every skill, agent, and command in this plugin (e.g. 'aws', 'cf', 'do', 'supabase'). The marketplace name 'cloud-foo' may or may not equal this prefix."
+    }
+  }
+}

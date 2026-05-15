@@ -1,0 +1,125 @@
+{
+  "name": "blackrim-cloud-toolkits",
+  "owner": {
+    "name": "Blackrim.dev"
+  },
+  "metadata": {
+    "description": "Cloud-development plugins covering AWS, GCP, Azure, OCI, IBM, Alibaba, Tencent, plus edge / PaaS / VPS providers (Cloudflare, DigitalOcean, Hetzner, Fly.io, Vercel, Supabase, Render, Railway, Linode, Vultr, Scaleway, Netlify). Domain skills, SME sub-agents, and slash commands for building, reviewing, and migrating cloud workloads."
+  },
+  "plugins": [
+    {
+      "name": "cloud-aws",
+      "source": "./cloud-aws",
+      "description": "AWS development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-gcp",
+      "source": "./cloud-gcp",
+      "description": "Google Cloud development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-azure",
+      "source": "./cloud-azure",
+      "description": "Microsoft Azure development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-oci",
+      "source": "./cloud-oci",
+      "description": "Oracle Cloud Infrastructure development toolkit — Compute, OKE, Object Storage, Autonomous Database, OCI IAM, networking, and observability skills.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-cloudflare",
+      "source": "./cloud-cloudflare",
+      "description": "Cloudflare development toolkit — Workers, R2, D1, Pages, Zero Trust, and edge networking skills, with SME sub-agents and slash commands.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-digitalocean",
+      "source": "./cloud-digitalocean",
+      "description": "DigitalOcean development toolkit — Droplets, App Platform, DOKS, Spaces, Managed Databases, and networking skills, with SME sub-agents and slash commands.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-hetzner",
+      "source": "./cloud-hetzner",
+      "description": "Hetzner Cloud development toolkit — Hetzner Cloud servers, volumes, networks, load balancers, firewalls, and Robot dedicated infrastructure.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-fly",
+      "source": "./cloud-fly",
+      "description": "Fly.io development toolkit — Machines, Apps, Volumes, Postgres, Redis, networking, anycast, scale-to-zero, and global multi-region deployments.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-vercel",
+      "source": "./cloud-vercel",
+      "description": "Vercel development toolkit — Next.js deployments, Edge Functions, Edge Middleware, Image Optimization, KV / Postgres / Blob, ISR, and monorepos.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-supabase",
+      "source": "./cloud-supabase",
+      "description": "Supabase development toolkit — Postgres, Auth, Row Level Security, Storage, Realtime, Edge Functions, Vector / pgvector, migrations, and self-hosting.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-render",
+      "source": "./cloud-render",
+      "description": "Render development toolkit — Web Services, Background Workers, Cron Jobs, Static Sites, Managed Postgres / Redis, Disks, and Blueprints (IaC).",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-railway",
+      "source": "./cloud-railway",
+      "description": "Railway development toolkit — Services, Volumes, Plugins, Environments, Templates, Cron Jobs, observability, and PR preview deployments.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-linode",
+      "source": "./cloud-linode",
+      "description": "Linode (Akamai Cloud Computing) toolkit — Compute Instances, LKE Kubernetes, Object Storage, Managed Databases, NodeBalancer, VLAN, and Cloud Firewalls.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-vultr",
+      "source": "./cloud-vultr",
+      "description": "Vultr development toolkit — Cloud Compute, Bare Metal, VKE Kubernetes, Object Storage, Managed Databases, Load Balancers, and VPC 2.0.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-scaleway",
+      "source": "./cloud-scaleway",
+      "description": "Scaleway development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding and architecture review. EU data residency, Kapsule, Serverless Containers, Object Storage, and IAM.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-netlify",
+      "source": "./cloud-netlify",
+      "description": "Netlify development toolkit — Builds, Edge Functions, Functions (background / scheduled), Blobs, Forms, Identity, redirects, and Deploy Previews.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-ibm",
+      "source": "./cloud-ibm",
+      "description": "IBM Cloud development toolkit — VPC, Code Engine, IKS / Red Hat OpenShift on IBM Cloud, Cloud Object Storage, Cloudant, IAM, and watsonx services.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-alibaba",
+      "source": "./cloud-alibaba",
+      "description": "Alibaba Cloud development toolkit — ECS, ACK Kubernetes, Function Compute, OSS, RDS / PolarDB, VPC, RAM, ApsaraDB, and CDN. APAC and China-region patterns.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cloud-tencent",
+      "source": "./cloud-tencent",
+      "description": "Tencent Cloud development toolkit — CVM, TKE Kubernetes, SCF (serverless), COS object storage, TencentDB, VPC, CAM IAM, and CDN. APAC and China-region patterns.",
+      "version": "0.1.0"
+    }
+  ]
+}

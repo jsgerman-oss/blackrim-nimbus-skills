@@ -1,0 +1,22 @@
+{
+  "name": "cloud-render",
+  "description": "Render development toolkit — Web Services, Background Workers, Cron Jobs, Static Sites, Managed Postgres / Redis, Disks, and Blueprints (IaC).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "render",
+    "render-com",
+    "web-service",
+    "background-worker",
+    "cron-job",
+    "blueprint",
+    "managed-postgres",
+    "managed-redis",
+    "static-site",
+    "preview-env"
+  ],
+  "prefix": "render"
+}

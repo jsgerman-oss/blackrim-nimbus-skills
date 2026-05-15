@@ -1,0 +1,23 @@
+{
+  "name": "cloud-supabase",
+  "description": "Supabase development toolkit — Postgres, Auth, Row Level Security, Storage, Realtime, Edge Functions, Vector / pgvector, migrations, and self-hosting.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "supabase",
+    "postgres",
+    "rls",
+    "row-level-security",
+    "auth",
+    "realtime",
+    "edge-functions",
+    "pgvector",
+    "storage",
+    "migrations",
+    "self-host"
+  ],
+  "prefix": "supabase"
+}

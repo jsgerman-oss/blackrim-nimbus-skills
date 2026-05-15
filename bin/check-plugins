@@ -1,0 +1,179 @@
+#!/usr/bin/env node
+// Validator engine.
+//
+// Loads the marketplace, builds scoped contexts (marketplace, plugin, skill,
+// agent, command), and invokes every rule in bin/lib/rules.js against each.
+// Each rule is responsible for one check; the engine handles traversal,
+// frontmatter parsing, and reporting.
+//
+// Exits 0 if no errors, 1 otherwise. Warnings never fail the build.
+//
+// Flags:
+//   --rule <id>       Run only rules whose id matches.
+//   --skip <id>       Skip a rule by id (repeatable via comma).
+//   --json            Emit JSON results.
+
+import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { join, dirname, basename, relative } from "node:path";
+import { fileURLToPath } from "node:url";
+import Ajv from "ajv/dist/2020.js";
+import addFormats from "ajv-formats";
+import {
+  buildMarketplaceFromPlugins,
+  loadPluginManifests,
+} from "./lib/marketplace.js";
+import { readMarkdown } from "./lib/skill.js";
+import { rules } from "./lib/rules.js";
+import { buildPluginReadmeRegion } from "./lib/plugin-readme.js";
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const args = process.argv.slice(2);
+const flag = (name) => {
+  const i = args.indexOf(name);
+  return i >= 0 ? args[i + 1] : null;
+};
+const onlyRule = flag("--rule");
+const skipRules = new Set((flag("--skip") ?? "").split(",").filter(Boolean));
+const jsonOut = args.includes("--json");
+
+// --- Setup ---------------------------------------------------------------
+
+function loadJson(path) {
+  try { return JSON.parse(readFileSync(path, "utf8")); }
+  catch (e) { return { __parseError: e.message }; }
+}
+
+const ajv = new Ajv({ allErrors: true, strict: true });
+addFormats(ajv);
+const validateMarketplace = ajv.compile(JSON.parse(readFileSync(join(repoRoot, "schemas/marketplace.schema.json"), "utf8")));
+const validatePlugin = ajv.compile(JSON.parse(readFileSync(join(repoRoot, "schemas/plugin.schema.json"), "utf8")));
+
+// --- Context builders ---------------------------------------------------
+
+function readMd(path) {
+  const result = readMarkdown(path);
+  return {
+    frontmatter: result.error ? null : result.data,
+    content: result.error ? null : result.content,
+    parseError: result.error ?? null,
+  };
+}
+
+function listDir(path) {
+  if (!existsSync(path)) return [];
+  return readdirSync(path).filter((f) => !f.startsWith("."));
+}
+
+function buildPluginContext(p) {
+  const dir = p.dir;
+  const dirName = basename(dir);
+  const prefix = p.manifest.prefix;
+
+  const skillsDir = join(dir, "skills");
+  const skills = listDir(skillsDir)
+    .filter((slug) => existsSync(join(skillsDir, slug, "SKILL.md")))
+    .map((slug) => {
+      const path = join(skillsDir, slug, "SKILL.md");
+      const md = readMd(path);
+      return { slug, path, relPath: relative(repoRoot, path), dirRelPath: relative(repoRoot, join(skillsDir, slug)), ...md };
+    });
+
+  const agentsDir = join(dir, "agents");
+  const agents = listDir(agentsDir).filter((f) => f.endsWith(".md")).map((filename) => {
+    const path = join(agentsDir, filename);
+    const md = readMd(path);
+    let role = null;
+    if (filename === `${prefix}-architect.md`) role = "architect";
+    else if (filename === `${prefix}-security-reviewer.md`) role = "security-reviewer";
+    return { filename, role, prefix, path, relPath: relative(repoRoot, path), ...md };
+  });
+
+  const commandsDir = join(dir, "commands");
+  const commands = listDir(commandsDir).filter((f) => f.endsWith(".md")).map((filename) => {
+    const path = join(commandsDir, filename);
+    const md = readMd(path);
+    return { filename, prefix, path, relPath: relative(repoRoot, path), ...md };
+  });
+
+  const readmePath = join(dir, "README.md");
+  return {
+    manifest: p.manifest,
+    manifestRelPath: relative(repoRoot, p.path),
+    dir,
+    dirName,
+    dirRelPath: relative(repoRoot, dir),
+    prefix,
+    skills,
+    agents,
+    commands,
+    readmePath,
+    readmeRelPath: relative(repoRoot, readmePath),
+    readmeContent: existsSync(readmePath) ? readFileSync(readmePath, "utf8") : null,
+  };
+}
+
+// --- Engine -------------------------------------------------------------
+
+const issues = [];
+const enabledRules = rules.filter((r) => !skipRules.has(r.id) && (!onlyRule || r.id === onlyRule));
+
+function emit(rule, found) {
+  for (const i of found) {
+    issues.push({ ruleId: rule.id, severity: rule.severity, label: i.label, message: i.message });
+  }
+}
+
+const marketplacePath = join(repoRoot, ".claude-plugin", "marketplace.json");
+const marketplace = existsSync(marketplacePath) ? loadJson(marketplacePath) : null;
+if (marketplace?.__parseError) {
+  issues.push({ ruleId: "marketplace-parses", severity: "error", label: "marketplace.json", message: `invalid JSON — ${marketplace.__parseError}` });
+}
+const pluginManifests = loadPluginManifests(repoRoot);
+const plugins = pluginManifests.map(buildPluginContext);
+const regenerated = marketplace ? buildMarketplaceFromPlugins(pluginManifests, marketplace) : null;
+
+const sharedCtx = { repoRoot, validateMarketplace, validatePlugin, buildPluginReadmeRegion };
+
+for (const rule of enabledRules) {
+  if (rule.scope === "marketplace") {
+    emit(rule, rule.check({ marketplace: marketplace?.__parseError ? null : marketplace, plugins, regenerated, ...sharedCtx }));
+  }
+}
+for (const plugin of plugins) {
+  for (const rule of enabledRules) {
+    if (rule.scope === "plugin") emit(rule, rule.check({ plugin, ...sharedCtx }));
+  }
+  for (const skill of plugin.skills) {
+    for (const rule of enabledRules) {
+      if (rule.scope === "skill") emit(rule, rule.check({ skill, plugin, ...sharedCtx }));
+    }
+  }
+  for (const agent of plugin.agents) {
+    for (const rule of enabledRules) {
+      if (rule.scope === "agent") emit(rule, rule.check({ agent, plugin, ...sharedCtx }));
+    }
+  }
+  for (const command of plugin.commands) {
+    for (const rule of enabledRules) {
+      if (rule.scope === "command") emit(rule, rule.check({ command, plugin, ...sharedCtx }));
+    }
+  }
+}
+
+// --- Report -------------------------------------------------------------
+
+const errors = issues.filter((i) => i.severity === "error");
+const warnings = issues.filter((i) => i.severity === "warning");
+
+if (jsonOut) {
+  console.log(JSON.stringify({ ok: errors.length === 0, errors, warnings, plugins: plugins.length, rules: enabledRules.length }, null, 2));
+} else {
+  for (const w of warnings) console.warn(`warn  [${w.ruleId}] ${w.label}: ${w.message}`);
+  for (const e of errors) console.error(`error [${e.ruleId}] ${e.label}: ${e.message}`);
+  if (errors.length === 0) {
+    console.log(`ok    ${plugins.length} plugins, ${enabledRules.length} rules, ${warnings.length} warnings`);
+  } else {
+    console.error(`\nfail  ${errors.length} errors, ${warnings.length} warnings across ${plugins.length} plugins`);
+  }
+}
+process.exit(errors.length === 0 ? 0 : 1);

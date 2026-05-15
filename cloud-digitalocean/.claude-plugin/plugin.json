@@ -1,0 +1,23 @@
+{
+  "name": "cloud-digitalocean",
+  "description": "DigitalOcean development toolkit — Droplets, App Platform, DOKS, Spaces, Managed Databases, and networking skills, with SME sub-agents and slash commands.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "digitalocean",
+    "droplets",
+    "app-platform",
+    "doks",
+    "kubernetes",
+    "spaces",
+    "managed-databases",
+    "load-balancer",
+    "vpc",
+    "doctl",
+    "terraform"
+  ],
+  "prefix": "do"
+}

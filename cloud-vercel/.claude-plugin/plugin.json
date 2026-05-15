@@ -1,0 +1,22 @@
+{
+  "name": "cloud-vercel",
+  "description": "Vercel development toolkit — Next.js deployments, Edge Functions, Edge Middleware, Image Optimization, KV / Postgres / Blob, ISR, and monorepos.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Blackrim.dev"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vercel",
+    "nextjs",
+    "edge-functions",
+    "edge-middleware",
+    "isr",
+    "image-optimization",
+    "monorepo",
+    "preview-deployments",
+    "vercel-kv",
+    "vercel-postgres"
+  ],
+  "prefix": "vercel"
+}
