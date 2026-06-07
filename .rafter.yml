@@ -1,0 +1,10 @@
+# Rafter secret-scan policy. Excludes paths that only ever produce false
+# positives so the gate stays meaningful. Dependency lockfiles carry integrity
+# hashes that match high-entropy key patterns; application and config source
+# stays scanned. Add a repo-specific path below only after confirming a finding
+# is a false positive (a public test vector, a documented placeholder, etc.).
+scan:
+  exclude_paths:
+    - "**/package-lock.json"
+    - "**/pnpm-lock.yaml"
+    - "**/yarn.lock"

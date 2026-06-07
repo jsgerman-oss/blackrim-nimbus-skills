@@ -1,7 +1,12 @@
 version: 2
 updates:
   # Keep pinned GitHub Actions current, including Raftersecurity/rafter-cli.
+  # Grouped into a single weekly PR to avoid a flood of one-per-action PRs.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
