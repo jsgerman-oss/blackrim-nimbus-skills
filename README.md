@@ -188,11 +188,11 @@ The **Verification checklist** is the load-bearing section — it's what gates "
 
 ## 🧪 What's in the validator
 
-Every plugin and every file is checked by a **declarative rule registry** at `bin/lib/rules.js`. Run `npm run rules` to print the live list (28 rules across 5 scopes).
+Every plugin and every file is checked by a **declarative rule registry** at `bin/lib/rules.js`. Run `npm run rules` to print the live list (29 rules across 5 scopes).
 
 | Scope          | What it checks                                                                |
 | -------------- | ----------------------------------------------------------------------------- |
-| `marketplace`  | JSON schema, plugin references resolve, regen is in sync                      |
+| `marketplace`  | JSON schema, plugin references resolve, `marketplace.json` + the pack's `providers.json` in sync |
 | `plugin`       | `plugin.json` schema, name matches dir, ≥5 skills, has both agents, has command, README managed-region in sync |
 | `skill`        | Frontmatter parses, name matches slug, description ≥20 chars, `## Verification checklist` with `- [ ]` items |
 | `agent`        | Frontmatter parses, role-correct tools (architect adds `WebFetch`, security-reviewer adds `Bash`), `model: sonnet`, canonical body sections present |
@@ -214,7 +214,7 @@ cd blackrim-nimbus-skills
 npm install
 
 # Validate
-npm run check                                # run all 28 rules
+npm run check                                # run all 29 rules
 npm run check -- --rule plugin-schema        # one rule
 npm run check -- --skip skill-checklist-min-items  # skip one
 npm run check -- --json                      # machine-readable output
@@ -226,10 +226,11 @@ npm run rules -- --json                      # JSON
 npm run checklist cloud-aws                  # all checklists in a plugin
 npm run checklist cloud-aws aws-compute --json   # JSON for one skill
 
-# Regenerate derived files (run after adding skills/agents/commands)
-npm run regen                                # marketplace.json + plugin READMEs
+# Regenerate derived files (run after adding skills/agents/commands or a provider)
+npm run regen                                # marketplace.json + plugin READMEs + pack provider index
 npm run regen:marketplace                    # marketplace.json only
 npm run regen:plugin-readmes                 # plugin README "What's inside" regions only
+npm run regen:pack-providers                 # pack/nimbus/providers.json only
 ```
 
 ### Adding a new plugin

@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+// Regenerate pack/nimbus/providers.json from each cloud-* plugin's manifest +
+// skills. plugin.json / SKILL.md are authoritative; providers.json is a derived
+// snapshot the nimbus pack carries so provider breadth is reachable from the
+// pack after it is vendored away from the plugin sources.
+//
+// Idempotent: exits 0 without writing when already in sync. No-ops when the
+// pack is absent. Run via `npm run regen:pack-providers` (folded into
+// `npm run regen`).
+
+import { writeFileSync, mkdirSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  buildPackProvidersIndex,
+  serializePackProviders,
+  readPackProvidersRaw,
+  packPresent,
+  PACK_PROVIDERS_REL,
+} from "./lib/providers.js";
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+if (!packPresent(repoRoot)) {
+  console.log("skip  no pack/ present — nothing to regenerate");
+  process.exit(0);
+}
+
+const index = buildPackProvidersIndex(repoRoot);
+const next = serializePackProviders(index);
+const previous = readPackProvidersRaw(repoRoot) ?? "";
+
+if (next === previous) {
+  console.log(`ok    ${PACK_PROVIDERS_REL} already in sync (${index.provider_count} providers)`);
+  process.exit(0);
+}
+
+const target = join(repoRoot, PACK_PROVIDERS_REL);
+mkdirSync(dirname(target), { recursive: true });
+writeFileSync(target, next);
+console.log(`wrote ${PACK_PROVIDERS_REL} (${index.provider_count} providers)`);

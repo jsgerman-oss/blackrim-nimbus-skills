@@ -8,7 +8,8 @@
     "check": "node bin/check-plugins",
     "regen:marketplace": "node bin/regen-marketplace",
     "regen:plugin-readmes": "node bin/regen-plugin-readmes",
-    "regen": "npm run regen:marketplace && npm run regen:plugin-readmes",
+    "regen:pack-providers": "node bin/regen-pack-providers",
+    "regen": "npm run regen:marketplace && npm run regen:plugin-readmes && npm run regen:pack-providers",
     "rules": "node bin/list-rules",
     "checklist": "node bin/list-checklist",
     "test": "npm run check"

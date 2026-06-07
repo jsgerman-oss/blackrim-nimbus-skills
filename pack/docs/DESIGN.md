@@ -53,8 +53,14 @@ escape hatch.
   target cloud. The engine optimizes the golden path; breadth is documentation +
   skills, not scaffold templates.
 
-`golden.PROVIDERS` is the single source of truth for that list and is kept in sync
-with the `cloud-*` plugins and the site's provider matrix.
+`golden.PROVIDERS` is the engine's in-code list of those 19 (the count `info`
+reports). `nimbus providers` reads a richer generated index, `nimbus/providers.json`,
+**derived** from the `cloud-*` plugin manifests + skills by `npm run
+regen:pack-providers` and drift-checked by the `pack-providers-in-sync` validator
+rule — the same authoritative→derived→regen→drift-rule pattern the repo uses for
+`marketplace.json`. Both track the same `cloud-*` plugins (and the site's provider
+matrix); [`docs/PROVIDERS.md`](PROVIDERS.md) maps the breadth to the golden path
+layer-by-layer (nim-6y5).
 
 ## 3. The engine: golden → scaffold → readiness
 
@@ -170,9 +176,10 @@ This pack was built across a small epic. Current status:
   `readiness` and the `version`/`info`/`scaffold`/`readiness`/`providers` CLI.
 - `nim-ulq` *(closed)* — the `golden-path-hosting` skill: the full deploy process,
   worked example, and anti-patterns (vite + voidzero + cloudflare + convex).
-- `nim-6y5` *(open)* — curate the 19 provider skills into the pack + wire the
-  validator/regen. The breadth half of §2; the `providers` list already names them.
-- `nim-114` *(this bead)* — bring `docs/DESIGN.md` + tests + `README.md` to launch
+- `nim-6y5` *(closed)* — curate the 19 provider skills into the pack + wire the
+  validator/regen: the generated `providers.json` index, `nimbus providers`, the
+  `pack-providers-in-sync` drift rule, and `docs/PROVIDERS.md`. The breadth half of §2.
+- `nim-114` *(closed)* — bring `docs/DESIGN.md` + tests + `README.md` to launch
   quality, aligned with the repo brand.
 
 ## 6. Deployment

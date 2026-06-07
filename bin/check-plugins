@@ -25,6 +25,13 @@ import {
 import { readMarkdown } from "./lib/skill.js";
 import { rules } from "./lib/rules.js";
 import { buildPluginReadmeRegion } from "./lib/plugin-readme.js";
+import {
+  buildPackProvidersIndex,
+  serializePackProviders,
+  readPackProvidersRaw,
+  packPresent,
+  PACK_PROVIDERS_REL,
+} from "./lib/providers.js";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -132,11 +139,21 @@ const pluginManifests = loadPluginManifests(repoRoot);
 const plugins = pluginManifests.map(buildPluginContext);
 const regenerated = marketplace ? buildMarketplaceFromPlugins(pluginManifests, marketplace) : null;
 
+// Pack provider index: null when the nimbus pack is absent (rule no-ops),
+// otherwise the regen output + the on-disk file for the drift check.
+const packProviders = packPresent(repoRoot)
+  ? {
+      regenSerialized: serializePackProviders(buildPackProvidersIndex(repoRoot)),
+      onDiskRaw: readPackProvidersRaw(repoRoot),
+      relPath: PACK_PROVIDERS_REL,
+    }
+  : null;
+
 const sharedCtx = { repoRoot, validateMarketplace, validatePlugin, buildPluginReadmeRegion };
 
 for (const rule of enabledRules) {
   if (rule.scope === "marketplace") {
-    emit(rule, rule.check({ marketplace: marketplace?.__parseError ? null : marketplace, plugins, regenerated, ...sharedCtx }));
+    emit(rule, rule.check({ marketplace: marketplace?.__parseError ? null : marketplace, plugins, regenerated, packProviders, ...sharedCtx }));
   }
 }
 for (const plugin of plugins) {

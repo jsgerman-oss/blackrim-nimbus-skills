@@ -34,6 +34,12 @@ def run(argv):
     return rc, out.getvalue()
 
 
+def run_err(argv):
+    out, err = io.StringIO(), io.StringIO()
+    rc = cli.main(argv, out=out, err=err)
+    return rc, out.getvalue(), err.getvalue()
+
+
 # ---- version --------------------------------------------------------------- #
 
 def test_version_text():
@@ -60,8 +66,8 @@ def test_info_text_shows_providers_and_roadmap():
     rc, s = run(["info"])
     assert rc == 0
     assert "providers:   19 clouds" in s
-    assert "Remaining roadmap:" in s
-    assert "nim-6y5" in s  # the still-open sibling is named in the roadmap
+    assert "Roadmap:" in s
+    assert "nim-6y5" in s  # the provider-curation bead is named in the roadmap
 
 
 def test_info_json_active_with_roadmap():
@@ -72,23 +78,6 @@ def test_info_json_active_with_roadmap():
     assert data["providers"] == 19
     assert "scaffold" in data["commands"] and "readiness" in data["commands"]
     assert isinstance(data["roadmap"], list) and data["roadmap"]
-
-
-# ---- providers ------------------------------------------------------------- #
-
-def test_providers_text_marks_golden():
-    rc, s = run(["providers"])
-    assert rc == 0
-    assert "  * cloudflare" in s  # golden provider flagged
-    assert "vercel" in s
-
-
-def test_providers_json_lists_19():
-    rc, s = run(["providers", "--json"])
-    assert rc == 0
-    data = json.loads(s)
-    assert len(data["providers"]) == 19
-    assert data["golden_provider"] == "cloudflare"
 
 
 # ---- scaffold -------------------------------------------------------------- #
@@ -181,6 +170,67 @@ def test_bare_invocation_prints_help_not_error():
     rc, s = run([])
     assert rc == 0
     assert "usage:" in s.lower()
+
+
+# --- providers: the breadth behind the golden path (nim-6y5) --------------
+
+def test_providers_list_text_shows_all_clouds():
+    rc, s = run(["providers"])
+    assert rc == 0
+    assert "19 clouds" in s
+    assert "cloud-aws" in s and "cloud-cloudflare" in s and "cloud-vultr" in s
+
+
+def test_providers_list_json_is_the_index():
+    rc, s = run(["providers", "--json"])
+    assert rc == 0
+    data = json.loads(s)
+    assert data["schema"] == "nimbus.providers.v1"
+    assert data["provider_count"] == len(data["providers"]) == 19
+    assert data["golden_path"]["hosting"] == "cloudflare"
+
+
+def test_providers_detail_by_prefix_lists_skills():
+    rc, s = run(["providers", "aws"])
+    assert rc == 0
+    assert "cloud-aws" in s
+    assert "aws-compute" in s  # a provider skill is reachable through the pack
+
+
+def test_providers_detail_accepts_full_name():
+    rc, s = run(["providers", "cloud-aws"])
+    assert rc == 0
+    assert "aws-" in s
+
+
+def test_providers_unknown_errors_on_stderr():
+    rc, out, err = run_err(["providers", "nope"])
+    assert rc == 2
+    assert out == ""
+    assert "unknown provider" in err.lower()
+
+
+def test_providers_index_is_well_formed():
+    # The carried snapshot the pack ships: parses, is self-consistent, and every
+    # provider exposes its prefixed skills so the golden path's breadth is reachable.
+    with open(cli._PROVIDERS_PATH, encoding="utf-8") as f:
+        index = json.load(f)
+    assert index["provider_count"] == len(index["providers"]) == 19
+    assert index["golden_path"]["primary_provider"].startswith("cloud-")
+    for p in index["providers"]:
+        assert p["name"].startswith("cloud-")
+        assert isinstance(p["prefix"], str) and p["prefix"]
+        assert p["skill_count"] == len(p["skills"]) >= 5
+        for skill in p["skills"]:
+            assert skill["slug"].startswith(p["prefix"] + "-")
+
+
+def test_info_marks_nim_6y5_landed():
+    rc, s = run(["info", "--json"])
+    assert rc == 0
+    roadmap = json.loads(s)["roadmap"]
+    entry = next(e for e in roadmap if e["bead"] == "nim-6y5")
+    assert entry["landed"] is True
 
 
 if __name__ == "__main__":  # allow running the fixture-free subset without pytest

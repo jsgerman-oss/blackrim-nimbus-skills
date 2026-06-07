@@ -1,0 +1,640 @@
+{
+  "schema": "nimbus.providers.v1",
+  "generator": "bin/regen-pack-providers",
+  "golden_path": {
+    "build": "voidzero",
+    "backend": "convex",
+    "hosting": "cloudflare",
+    "primary_provider": "cloud-cloudflare"
+  },
+  "provider_count": 19,
+  "providers": [
+    {
+      "name": "cloud-alibaba",
+      "prefix": "alibaba",
+      "description": "Alibaba Cloud development toolkit — ECS, ACK Kubernetes, Function Compute, OSS, RDS / PolarDB, VPC, RAM, ApsaraDB, and CDN. APAC and China-region patterns.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "alibaba-compute",
+          "description": "Choose, design, or harden Alibaba Cloud compute — ECS (g7/c7/r7/ARM g8y, Spot), ACK Kubernetes (Standard/Pro/Serverless), Function Compute (FC), E-HPC, ECI, Serverless App Engine (SAE). Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost, latency, or availability."
+        },
+        {
+          "slug": "alibaba-iac-and-deployment",
+          "description": "Choose, scaffold, or review Alibaba Cloud Infrastructure-as-Code and deployment — Alibaba Cloud CLI (aliyun ≥ 3.0.230), Terraform aliyun/alicloud provider (≥ 1.220), Resource Orchestration Service (ROS), Cloud Assistant, GitOps for ACK, GitHub Actions / Jenkins with RAM Role OIDC. Use when starting an IaC project, picking a tool, or hardening a release path."
+        },
+        {
+          "slug": "alibaba-identity-and-security",
+          "description": "Design or audit Alibaba Cloud identity, access, and security posture — RAM (users/groups/roles/policies), STS temporary credentials, KMS (Standard/Dedicated HSM), Secrets Manager, Cloud Config, Cloud Firewall, Security Center (Threat Detection), Anti-DDoS, ActionTrail, SDDP. Use when writing RAM policies, rotating secrets, scoping roles, or hardening an account."
+        },
+        {
+          "slug": "alibaba-networking-and-edge",
+          "description": "Design or audit Alibaba Cloud networking — VPC, VSwitch, route tables, Security Groups, ENI, SLB/ALB/NLB, NAT Gateway, EIP, CEN (cross-region), CDN, DCDN, Anti-DDoS Pro/Premium, WAF, IPv6 Gateway. Use when standing up a new VPC, exposing a service, connecting regions, or hardening edge."
+        },
+        {
+          "slug": "alibaba-observability-and-cost",
+          "description": "Wire up or audit Alibaba Cloud observability and cost — CloudMonitor (metrics/alarms), Simple Log Service (SLS logs/metrics/query), ARMS (APM traces), Cost Manager (bills/budgets/anomaly), Resource Management (groups/tags), reservation and savings models. Use when adding telemetry, tracking a regression, or shrinking the bill."
+        },
+        {
+          "slug": "alibaba-storage-and-databases",
+          "description": "Design or audit Alibaba Cloud storage and database tiers — OSS, EBS cloud disks, NAS, RDS (MySQL/Postgres/SQL Server/MariaDB), PolarDB, ApsaraDB for MongoDB / Redis, Lindorm, AnalyticDB. Use when picking a data store, modeling access patterns, sizing, securing, or configuring lifecycle and backup."
+        }
+      ]
+    },
+    {
+      "name": "cloud-aws",
+      "prefix": "aws",
+      "description": "AWS development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "aws-compute",
+          "description": "Choose, design, or harden AWS compute — Lambda, ECS / Fargate, EKS, EC2, App Runner, Batch. Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost / latency / availability."
+        },
+        {
+          "slug": "aws-iac-and-deployment",
+          "description": "Choose, scaffold, or review AWS Infrastructure-as-Code and deployment — CDK, Terraform, CloudFormation, SAM, CodePipeline, CodeBuild, CodeDeploy, GitHub Actions OIDC, blue/green, canary. Use when starting a new IaC project, picking a tool, or hardening a release path."
+        },
+        {
+          "slug": "aws-identity-and-security",
+          "description": "Design or audit AWS identity, access, and security posture — IAM, SSO (IAM Identity Center), KMS, Secrets Manager, GuardDuty, Security Hub, CloudTrail, Macie, IAM Access Analyzer. Use when writing policies, rotating secrets, scoping roles, or hardening an account."
+        },
+        {
+          "slug": "aws-networking-and-edge",
+          "description": "Design or audit AWS networking — VPC, subnets, route tables, security groups, NAT, VPC endpoints, Transit Gateway, ALB / NLB, API Gateway, CloudFront, Route 53, WAF, PrivateLink. Use when standing up a new VPC, exposing a service, or hardening edge."
+        },
+        {
+          "slug": "aws-observability-and-cost",
+          "description": "Wire up or audit AWS observability and cost — CloudWatch metrics / logs / alarms, X-Ray, OpenTelemetry, Container Insights, Cost Explorer, budgets, Compute Optimizer, Savings Plans. Use when adding telemetry, tracking down a regression, or shrinking a bill."
+        },
+        {
+          "slug": "aws-storage-and-databases",
+          "description": "Design or audit AWS storage and database tiers — S3, EBS, EFS, RDS / Aurora, DynamoDB, ElastiCache, OpenSearch, Redshift. Use when picking a data store, modeling access patterns, sizing, securing, or backing up data."
+        }
+      ]
+    },
+    {
+      "name": "cloud-azure",
+      "prefix": "azure",
+      "description": "Microsoft Azure development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "azure-compute",
+          "description": "Choose, design, or harden Azure compute — Azure Functions, AKS, Container Apps, App Service, Container Instances, Azure VMs, Batch. Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost / latency / availability."
+        },
+        {
+          "slug": "azure-iac-and-deployment",
+          "description": "Choose, scaffold, or review Azure Infrastructure-as-Code and deployment — Bicep, ARM templates, Terraform (azurerm + azapi), Azure DevOps Pipelines, GitHub Actions with OIDC federation, Deployment Stacks. Use when starting a new IaC project, picking a tool, or hardening a release path."
+        },
+        {
+          "slug": "azure-identity-and-security",
+          "description": "Design or audit Azure identity, access, and security posture — Microsoft Entra ID, Managed Identities, Azure RBAC, Key Vault, Defender for Cloud, Microsoft Sentinel, Conditional Access, Privileged Identity Management. Use when writing role assignments, scoping identities, hardening an account, or responding to a Defender finding."
+        },
+        {
+          "slug": "azure-networking-and-edge",
+          "description": "Design or audit Azure networking — VNet, subnets, NSGs, peering, hub-spoke, Application Gateway, Azure Front Door, API Management, Private Link, Azure Firewall, ExpressRoute. Use when standing up a new VNet, exposing a service to the internet, or hardening the network perimeter."
+        },
+        {
+          "slug": "azure-observability-and-cost",
+          "description": "Wire up or audit Azure observability and cost — Azure Monitor, Application Insights, Log Analytics, diagnostic settings, Cost Management + Billing, Azure Advisor, Reservations, Savings Plans, Spot scheduling. Use when adding telemetry, tracking down a regression, or shrinking an Azure bill."
+        },
+        {
+          "slug": "azure-storage-and-databases",
+          "description": "Design or audit Azure storage and database tiers — Blob Storage, ADLS Gen2, Azure Files, Azure SQL DB, Cosmos DB, PostgreSQL / MySQL Flexible Server, Azure Cache for Redis Enterprise, Synapse Analytics. Use when picking a data store, modeling access patterns, sizing, securing, or backing up data."
+        }
+      ]
+    },
+    {
+      "name": "cloud-cloudflare",
+      "prefix": "cf",
+      "description": "Cloudflare development toolkit — Workers, R2, D1, Pages, Zero Trust, and edge networking skills, with SME sub-agents and slash commands.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "cf-iac-and-deployment",
+          "description": "Configure or audit Cloudflare Infrastructure-as-Code and deployment — Wrangler (wrangler.toml / wrangler.jsonc), Terraform cloudflare/cloudflare ≥ 5.x, Pages CI, Workers Builds, GitHub Actions deploy with scoped API tokens, and secret management. Use when scaffolding a new project, wiring CI/CD, migrating from v4 Terraform provider, or hardening a release pipeline."
+        },
+        {
+          "slug": "cf-networking-and-edge",
+          "description": "Design or audit Cloudflare networking — DNS (authoritative), CDN cache rules, Load Balancing, Argo Smart Routing, Spectrum, Cloudflare Tunnel, Magic WAN / Magic Transit. Use when configuring DNS, tuning cache behaviour, exposing services, or connecting private infrastructure to Cloudflare's network."
+        },
+        {
+          "slug": "cf-observability-and-cost",
+          "description": "Wire up or audit Cloudflare observability and cost — Workers Analytics Engine, Logpush, Trace Workers, Web Analytics, GraphQL Analytics API, dashboard alerts, and billing tiers. Use when adding telemetry to Workers, debugging a production issue, reviewing billing, or deciding when to upgrade plans."
+        },
+        {
+          "slug": "cf-storage-and-databases",
+          "description": "Design or audit Cloudflare storage and databases — R2, D1, Workers KV, Queues, Hyperdrive, Vectorize. Use when picking an edge-native data store, modeling access patterns, securing data, or integrating Cloudflare storage with existing origin databases."
+        },
+        {
+          "slug": "cf-workers-and-compute",
+          "description": "Design or configure Cloudflare compute — Workers (modules, bindings), Workers AI, Durable Objects, Pages Functions, Workflows, Containers, Smart Placement. Use when choosing a runtime model, wiring bindings, sizing Durable Object state, or debugging CPU / wall-clock limits."
+        },
+        {
+          "slug": "cf-zero-trust-and-security",
+          "description": "Design or audit Cloudflare Zero Trust and security posture — Access (ZTNA / identity-aware proxy), Gateway (SWG / DNS filtering), WAF, Bot Management, DDoS posture, Page Shield, Magic Firewall, API Shield. Use when securing an application, filtering egress, building a Zero Trust network, or reviewing WAF coverage."
+        }
+      ]
+    },
+    {
+      "name": "cloud-digitalocean",
+      "prefix": "do",
+      "description": "DigitalOcean development toolkit — Droplets, App Platform, DOKS, Spaces, Managed Databases, and networking skills, with SME sub-agents and slash commands.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "do-compute",
+          "description": "Choose, design, or harden DigitalOcean compute — Droplets (Basic, General Purpose, CPU-Optimized, Memory-Optimized, Storage-Optimized, GPU), App Platform, DOKS (DigitalOcean Kubernetes), Functions (Serverless), and Snapshots. Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost, latency, or availability."
+        },
+        {
+          "slug": "do-iac-and-deployment",
+          "description": "Choose, scaffold, or review DigitalOcean Infrastructure-as-Code and deployment — doctl CLI, Terraform `digitalocean/digitalocean` provider, App Platform App Spec YAML, DOKS GitOps with Argo CD / Flux, GitHub Actions with PATs, and image build via doctl registry. Use when starting a new IaC project, picking a tool, or hardening a release path."
+        },
+        {
+          "slug": "do-identity-and-security",
+          "description": "Design or audit DigitalOcean identity and security posture — Teams (members, roles), Personal Access Tokens (PATs — scopes, rotation), OAuth applications, doctl authentication, Container Registry vulnerability scanning, Cloud Firewall posture, agent monitoring vs metrics agent, and project-based isolation. Use when writing access policies, rotating secrets, scoping tokens, or hardening a team account."
+        },
+        {
+          "slug": "do-networking-and-edge",
+          "description": "Design or audit DigitalOcean networking — VPC (per-region, multi-VPC patterns), Load Balancer (regional, global), Floating / Reserved IPs, DNS (PowerDNS-based), Cloud Firewall, Spaces CDN, and PTR records. Use when standing up a new VPC, exposing a service, hardening edge, or auditing east-west connectivity."
+        },
+        {
+          "slug": "do-observability-and-cost",
+          "description": "Wire up or audit DigitalOcean observability and cost — Monitoring (graphs, alert policies for CPU, disk, memory, bandwidth), Logs, Insights / metrics, project-level billing, Reserved capacity hooks, and snapshot lifecycle costs. Use when adding telemetry, tracking down a regression, or shrinking a bill."
+        },
+        {
+          "slug": "do-storage-and-databases",
+          "description": "Design or audit DigitalOcean storage and database tiers — Spaces (S3-compatible object storage), Volumes (block storage), Managed Databases (Postgres, MySQL, MongoDB, Redis, Kafka, OpenSearch), and Backups. Use when picking a data store, modeling access patterns, sizing, securing, or backing up data."
+        }
+      ]
+    },
+    {
+      "name": "cloud-fly",
+      "prefix": "fly",
+      "description": "Fly.io development toolkit — Machines, Apps, Volumes, Postgres, Redis, networking, anycast, scale-to-zero, and global multi-region deployments.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "fly-iac-and-deployment",
+          "description": "Design or audit Fly.io infrastructure-as-code and deployment — flyctl CLI, fly.toml configuration, deploy strategies (immediate/rolling/bluegreen/canary), GitHub Actions with superfly/flyctl-actions, machine pinning via the Machines API, Pulumi flyio/fly provider, multi-region deploys. Use when setting up a deployment pipeline, reviewing fly.toml structure, or choosing a deploy strategy."
+        },
+        {
+          "slug": "fly-machines-and-apps",
+          "description": "Design, size, or operate Fly Machines and Apps — Firecracker VMs, auto-start/stop, scale-to-zero, machine sizes, placement across regions, rolling vs immediate deploys, releases, fly-replay routing. Use when picking a machine size, configuring multi-region, reviewing a deployment strategy, or auditing scale-to-zero correctness."
+        },
+        {
+          "slug": "fly-networking-and-edge",
+          "description": "Design or audit Fly.io networking — anycast IPv4/IPv6, the 6PN WireGuard private network, Flycast for private anycast routing, fly.toml services, TCP/HTTP/TLS handlers, dedicated IPs, WireGuard peer tunnels. Use when exposing a service, designing service-to-service communication, configuring TLS termination, or auditing network exposure."
+        },
+        {
+          "slug": "fly-observability-and-cost",
+          "description": "Wire up or audit observability and cost on Fly.io — built-in Grafana metrics, fly logs (NATS-backed), shipping to external observability stacks, OpenTelemetry support, Fly pricing model (machine-seconds, volumes, egress). Use when adding telemetry to a Fly app, diagnosing a regression, or sizing a cost review."
+        },
+        {
+          "slug": "fly-security-and-secrets",
+          "description": "Design or audit Fly.io security posture — Fly tokens (org/app/deploy scope), fly secrets management, SSO and org membership, private apps via Flycast, least-privilege token handling, secret rotation, image hardening. Use when scoping credentials, rotating secrets, designing a private app, or reviewing the security posture of a Fly-hosted service."
+        },
+        {
+          "slug": "fly-storage-and-databases",
+          "description": "Design or audit storage and databases on Fly.io — Fly Volumes (AZ-local block storage), Fly Postgres (self-managed on Machines), Fly Redis (Upstash-backed), Tigris (S3-compatible object storage), LiteFS (SQLite replication). Use when choosing a data store, modeling replication, configuring backups, or planning a restore drill."
+        }
+      ]
+    },
+    {
+      "name": "cloud-gcp",
+      "prefix": "gcp",
+      "description": "Google Cloud development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding, health checks, and architecture review.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "gcp-compute",
+          "description": "Choose, design, or harden GCP compute — Cloud Run, GKE (Autopilot vs Standard), Cloud Functions Gen 2, App Engine, Compute Engine. Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost, latency, or availability."
+        },
+        {
+          "slug": "gcp-iac-and-deployment",
+          "description": "Choose, scaffold, or review GCP Infrastructure-as-Code and deployment — Terraform (hashicorp/google + google-beta), Config Connector (KCC), Cloud Deployment Manager (legacy), Cloud Build, Cloud Deploy (continuous delivery), Workload Identity Federation for GitHub Actions / GitLab OIDC. Use when starting a new IaC project, picking a tool, designing a CI/CD pipeline, or hardening a release path."
+        },
+        {
+          "slug": "gcp-identity-and-security",
+          "description": "Design or audit GCP identity, access, and security posture — Cloud IAM (allow + deny policies, conditions), Workload Identity Federation for non-GCP CI, Workload Identity for GKE, Secret Manager, Cloud KMS (CMEK + EKM), Security Command Center, BeyondCorp Enterprise, Binary Authorization, Org Policies. Use when writing IAM bindings, configuring Workload Identity, rotating secrets, scoping service accounts, or hardening an organization."
+        },
+        {
+          "slug": "gcp-networking-and-edge",
+          "description": "Design or audit GCP networking — VPC (auto vs custom, Shared VPC), Cloud Load Balancing (Global vs Regional, Application / Network), Cloud CDN, Cloud Armor, Cloud DNS, VPC Service Controls, Private Service Connect, Cloud NAT. Use when standing up a new VPC, exposing a service, hardening edge, or auditing connectivity."
+        },
+        {
+          "slug": "gcp-observability-and-cost",
+          "description": "Wire up or audit GCP observability and cost — Cloud Monitoring, Cloud Logging (log sinks to BigQuery / GCS / Pub/Sub), Cloud Trace, Profiler, Error Reporting, Recommender, Active Assist, Committed Use Discounts, Spend Alerts. Use when adding telemetry, tracking down a regression, or shrinking a bill."
+        },
+        {
+          "slug": "gcp-storage-and-databases",
+          "description": "Design or audit GCP storage and database tiers — Cloud Storage, Persistent Disk, Cloud SQL, AlloyDB, Spanner, Firestore, Memorystore, BigQuery. Use when picking a data store, modeling access patterns, sizing capacity, securing data, or configuring lifecycle and backups."
+        }
+      ]
+    },
+    {
+      "name": "cloud-hetzner",
+      "prefix": "hetzner",
+      "description": "Hetzner Cloud development toolkit — Hetzner Cloud servers, volumes, networks, load balancers, firewalls, and Robot dedicated infrastructure.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "hetzner-compute",
+          "description": "Choose, design, or harden Hetzner compute — Cloud server types (CX / CPX / CCX / CAX ARM Ampere), placement groups, snapshots vs backups vs images, server rescue, Robot dedicated server families (AX / EX / SX / GEX GPU), Auctions, server reset. Use when picking a server type, sizing capacity, designing for HA, or managing server lifecycle."
+        },
+        {
+          "slug": "hetzner-iac-and-deployment",
+          "description": "Choose, scaffold, or review Hetzner Infrastructure-as-Code and deployment — hcloud CLI, Terraform hetznercloud/hcloud provider (≥ 1.48), Ansible hetzner.hcloud collection, Packer for image baking, cloud-init for bootstrap, snapshot-as-golden-image pattern, GitHub Actions deploy with token from secrets. Use when starting a new IaC project, picking a tool, or hardening a release path for Hetzner infrastructure."
+        },
+        {
+          "slug": "hetzner-identity-and-security",
+          "description": "Design or audit Hetzner identity and security posture — API tokens (read-only vs read+write, project isolation), project-level access boundary and its RBAC limitations, SSH key management, Cloud Firewall policies, server password vs key-only auth, MFA on the Cloud console, Robot vs Cloud account separation. Use when scoping access, creating API tokens, auditing security posture, or hardening a Hetzner deployment."
+        },
+        {
+          "slug": "hetzner-networking",
+          "description": "Design or audit Hetzner networking — Private Networks (Cloud), Load Balancers (LB11 / LB21 / LB31), Floating IPs, Cloud Firewalls, vSwitch for Robot dedicated, dual-stack IPv4/IPv6 and the IPv4 cost surcharge, Reverse DNS (PTR), location vs network zone semantics. Use when standing up inter-server networking, exposing a service, or hardening network posture."
+        },
+        {
+          "slug": "hetzner-observability-and-cost",
+          "description": "Wire up or audit Hetzner observability and cost — hcloud server metrics (CPU / network / disk via API), Cloud Status page, Robot server monitoring, pairing with external observability stacks (Grafana Cloud, Datadog, Better Stack, Prometheus), Hetzner billing model (hourly capped at monthly), egress traffic allowances and per-TB overage, IPv4 surcharge. Use when adding telemetry, tracking down a cost regression, or sizing a monthly bill."
+        },
+        {
+          "slug": "hetzner-storage-and-databases",
+          "description": "Design or audit Hetzner storage and database options — Cloud Volumes, Backups, Snapshots, Storage Box (SFTP / SMB / WebDAV / object), and how to pair with external managed databases. Use when picking a storage tier, sizing volumes, configuring retention, or selecting a managed database provider to run alongside Hetzner compute."
+        }
+      ]
+    },
+    {
+      "name": "cloud-ibm",
+      "prefix": "ibm",
+      "description": "IBM Cloud development toolkit — VPC, Code Engine, IKS / Red Hat OpenShift on IBM Cloud, Cloud Object Storage, Cloudant, IAM, and watsonx services.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "ibm-compute",
+          "description": "Choose, design, or harden IBM Cloud compute — VPC Virtual Server Instances, VPC Bare Metal, Code Engine (serverless containers / Jobs / Functions), IKS, Red Hat OpenShift on IBM Cloud (ROKS), and Power Systems. Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost, latency, or availability."
+        },
+        {
+          "slug": "ibm-iac-and-deployment",
+          "description": "Choose, scaffold, or review IBM Cloud Infrastructure-as-Code and deployment — Terraform IBM-Cloud/ibm provider, IBM Cloud Schematics (managed Terraform), IBM Cloud Continuous Delivery Toolchains, Tekton pipelines, GitOps for ROKS/IKS, ibmcloud CLI and plugin ecosystem. Use when starting a new IaC project, picking a delivery tool, or hardening a release pipeline."
+        },
+        {
+          "slug": "ibm-identity-and-security",
+          "description": "Design or audit IBM Cloud identity and security posture — IAM Account / ResourceGroup / Service policies, Access Groups, Trusted Profiles for OIDC and compute identity, Secrets Manager, Key Protect (BYOK), Hyper Protect Crypto Services (KYOK / FIPS 140-2 Level 4), Security and Compliance Center, Activity Tracker, App ID. Use when writing IAM policies, scoping Access Groups, rotating secrets, managing encryption keys, or hardening account security posture."
+        },
+        {
+          "slug": "ibm-networking",
+          "description": "Design or audit IBM Cloud networking — VPC, subnets, Security Groups, ACLs, Public Gateways, Floating IPs, VPN-for-VPC, Transit Gateway, Direct Link, Cloud Internet Services, Private Path / Endpoint Gateways. Use when standing up a new VPC, connecting workloads, exposing services, or hardening network posture."
+        },
+        {
+          "slug": "ibm-observability-and-cost",
+          "description": "Wire up or audit IBM Cloud observability and cost — IBM Cloud Monitoring (Sysdig), IBM Cloud Logs (LogDNA), Activity Tracker, Cost Estimator, IBM Cloud Subscriptions (Committed Use), Showback / Chargeback patterns, Resource Group tagging. Use when adding telemetry to a new service, building dashboards, setting alerts, or analyzing cloud spend."
+        },
+        {
+          "slug": "ibm-storage-and-databases",
+          "description": "Design or audit IBM Cloud storage and database tiers — Cloud Object Storage, Block/File Storage for VPC, Cloudant, Db2 on Cloud, Databases for PostgreSQL / Redis / MongoDB / Elasticsearch / etcd / RabbitMQ / MySQL, Hyper Protect DBaaS. Use when picking a data store, modeling access patterns, sizing, securing, or configuring backups."
+        }
+      ]
+    },
+    {
+      "name": "cloud-linode",
+      "prefix": "linode",
+      "description": "Linode (Akamai Cloud Computing) toolkit — Compute Instances, LKE Kubernetes, Object Storage, Managed Databases, NodeBalancer, VLAN, and Cloud Firewalls.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "linode-compute",
+          "description": "Choose, design, or harden Linode compute — Compute Instances (Nanode / Shared / Dedicated / High Memory / Premium / GPU), Linode Kubernetes Engine (LKE), Bare Metal, Marketplace apps. Use when picking an instance plan, sizing a Kubernetes cluster, configuring autoscaling node pools, or reviewing a compute architecture for cost and availability."
+        },
+        {
+          "slug": "linode-iac-and-deployment",
+          "description": "Choose, scaffold, or review Linode Infrastructure-as-Code and deployment — linode-cli, Terraform linode/linode provider, Ansible Linode collection, StackScripts (legacy), cloud-init bootstrap, GitHub Actions CI/CD. Use when starting a new IaC project, picking a tool, or hardening a release path."
+        },
+        {
+          "slug": "linode-networking",
+          "description": "Design or audit Linode networking — VLAN (private L2), VPC (VPC + Subnets), NodeBalancer (L4/L7 load balancing), Cloud Firewall (stateful), Reserved IPs, IPv6. Use when standing up private networking, exposing a service, hardening edge, or auditing east-west connectivity."
+        },
+        {
+          "slug": "linode-observability-and-cost",
+          "description": "Wire up or audit Linode observability and cost — Longview agent, Cloud Manager metrics, external monitoring (Datadog / Better Stack / Grafana Cloud), alerts, billing model (per-hour with monthly cap), and the regional transfer pool. Use when adding telemetry, diagnosing a cost spike, or planning a billing review."
+        },
+        {
+          "slug": "linode-security",
+          "description": "Design or audit Linode security posture — Linode Manager users and roles, Personal Access Tokens (scopes and expiry), MFA and SSH key requirements, Cloud Firewall posture, root-user discipline, Akamai Shield DDoS, audit logs, OAuth applications. Use when hardening an account, scoping API access, reviewing access grants, or responding to a security event."
+        },
+        {
+          "slug": "linode-storage-and-databases",
+          "description": "Design or audit Linode storage and database tiers — Block Storage Volumes, Object Storage, Backups, Managed Databases (Postgres / MySQL), and custom Images. Use when choosing a data store, modeling lifecycle and access patterns, sizing capacity, securing data, or planning recovery."
+        }
+      ]
+    },
+    {
+      "name": "cloud-netlify",
+      "prefix": "netlify",
+      "description": "Netlify development toolkit — Builds, Edge Functions, Functions (background / scheduled), Blobs, Forms, Identity, redirects, and Deploy Previews.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "netlify-builds-and-deploys",
+          "description": "Configure or debug Netlify builds and deployments — netlify.toml, build environment, Deploy Previews, Branch Deploys, Atomic Deploys, Instant Rollback, Build Plugins, framework presets, Skip CI, and build minutes budgeting. Use when setting up a new site, tuning build performance, debugging a broken deploy, or reviewing CI/CD posture."
+        },
+        {
+          "slug": "netlify-data",
+          "description": "Design or implement Netlify's data layer — Netlify Blobs (persistent key-value storage, deploy-scoped vs site-wide), Forms (spam mitigation, reCAPTCHA, Akismet), Netlify Connect (Enterprise data caching layer), and third-party integrations (Supabase, Auth0, Stripe). Use when adding persistent state to a JAMstack site, wiring up a contact form, or choosing between Netlify-native data and an external database."
+        },
+        {
+          "slug": "netlify-functions-and-edge",
+          "description": "Design, implement, or audit Netlify serverless compute — Serverless Functions (Node.js / Go), Edge Functions (Deno runtime), Background Functions (async long-running), Scheduled Functions (cron), Blobs reads from functions, and geographic routing at the edge. Use when adding an API endpoint, customizing request handling, running cron jobs, or deciding between Functions and Edge Functions."
+        },
+        {
+          "slug": "netlify-iac-and-deployment",
+          "description": "Manage Netlify infrastructure-as-code and deployment — `netlify.toml` as the primary IaC surface, Netlify CLI (v17+), Build Plugins (`@netlify/plugin-*`), GitHub / GitLab / Bitbucket Git provider integration, deploy hooks, `netlify deploy --prod`, and the community Terraform `netlify/netlify` provider. Use when setting up a new site from code, scripting deployments in CI, wiring Git provider webhooks, or auditing the deployment pipeline."
+        },
+        {
+          "slug": "netlify-identity-and-security",
+          "description": "Design or audit Netlify identity and security posture — Netlify Identity (Gotrue), Visitor Access (basic auth / role-based at edge), site password protection, Single Sign-On, JWT secrets, environment variable scoping (Functions vs Build vs Runtime), DDoS / WAF (Pro+ and Enterprise), and security headers via `_headers` / `netlify.toml`. Use when locking down a site, implementing authentication, rotating secrets, or reviewing a security posture before launch."
+        },
+        {
+          "slug": "netlify-observability-and-cost",
+          "description": "Set up or audit Netlify observability and cost management — server-side Analytics, Function / Edge Function / Build logs, Logs Drain (Datadog / Logflare), Real User Monitoring, bandwidth and build minutes dashboards, billing tiers (Starter / Pro / Enterprise), and spend cap configuration. Use when adding telemetry to a Netlify site, diagnosing a cost spike, or planning a billing tier decision."
+        }
+      ]
+    },
+    {
+      "name": "cloud-oci",
+      "prefix": "oci",
+      "description": "Oracle Cloud Infrastructure development toolkit — Compute, OKE, Object Storage, Autonomous Database, OCI IAM, networking, and observability skills.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "oci-compute",
+          "description": "Choose, design, or harden OCI compute — Compute VMs and Bare Metal, GPU and A1 Ampere ARM shapes, Flex shapes, Container Engine for Kubernetes (OKE), Functions (Fn Project), Container Instances. Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost, latency, or availability."
+        },
+        {
+          "slug": "oci-iac-and-deployment",
+          "description": "Choose, scaffold, or review OCI Infrastructure-as-Code and deployment — Terraform with the oracle/oci provider, Resource Manager (managed Terraform), OCI DevOps service (build and deploy pipelines), GitOps with OKE, OCI CLI. Use when starting a new IaC project, designing a CI/CD pipeline, or hardening a release path."
+        },
+        {
+          "slug": "oci-identity-and-security",
+          "description": "Design or audit OCI identity, access, and security posture — OCI IAM (compartments, groups, dynamic groups, identity domains), Resource Principal authentication, Vault (KMS + Secrets), Cloud Guard, Security Zones, Bastion service, Data Safe, Vulnerability Scanning. Use when writing policies, structuring compartments, scoping roles, or hardening a tenancy."
+        },
+        {
+          "slug": "oci-networking-and-edge",
+          "description": "Design or audit OCI networking — VCN, subnets, route tables, security lists, Network Security Groups (NSGs), Load Balancer (LBaaS L7 vs Network LB), WAF, DNS Traffic Steering, FastConnect, Site-to-Site VPN, Service Gateway, IPv6. Use when standing up a new VCN, exposing a service, controlling east-west traffic, or hardening edge access."
+        },
+        {
+          "slug": "oci-observability-and-cost",
+          "description": "Wire up or audit OCI observability and cost — Monitoring (metrics, alarms), Logging (custom, service, audit), Logging Analytics, APM, Stack Monitoring, Cost Analysis, Budgets, Tag Defaults, Cost-Tracking Tags. Use when adding telemetry, tracing a regression, building dashboards, or analyzing a bill."
+        },
+        {
+          "slug": "oci-storage-and-databases",
+          "description": "Design or audit OCI storage and database tiers — Object Storage (Standard, Infrequent Access, Archive), Block Volumes, Autonomous Database (ATP, ADW, AJD), MySQL HeatWave, NoSQL Database, File Storage Service, Exadata Cloud Service. Use when picking a data store, modeling access patterns, sizing, securing, or configuring lifecycle and backup policies."
+        }
+      ]
+    },
+    {
+      "name": "cloud-railway",
+      "prefix": "railway",
+      "description": "Railway development toolkit — Services, Volumes, Plugins, Environments, Templates, Cron Jobs, observability, and PR preview deployments.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "railway-data",
+          "description": "Design or audit Railway data management — Database Plugins (Postgres, MySQL, Redis, MongoDB), seeding strategies, connection strings via Reference Variables, backups and restore, scaling Plugins, and when to migrate off Plugins to external managed databases. Use when provisioning a Plugin, wiring a connection string, designing a seed/migration workflow, or assessing whether a Plugin is the right long-term choice."
+        },
+        {
+          "slug": "railway-networking",
+          "description": "Design or audit Railway networking — service-to-service communication via private domains (`<service>.railway.internal`), public domains with automatic TLS, custom domains, port detection from `$PORT`, TCP proxy for non-HTTP services, and sticky-session considerations. Use when connecting services internally, exposing a service to the internet, setting up a custom domain, or debugging connectivity."
+        },
+        {
+          "slug": "railway-observability-and-cost",
+          "description": "Set up or audit Railway observability and cost — built-in log streaming (live and historical), service Metrics (CPU / memory / network), the Observability dashboard (Pro plan), external log drains (Datadog, Better Stack, Logflare), Railway's per-second billing model, and a cadence for reviewing the Usage page. Use when adding telemetry to a service, wiring a log drain, diagnosing a cost spike, or setting up a regular billing review."
+        },
+        {
+          "slug": "railway-security-and-secrets",
+          "description": "Design or audit Railway security posture — Variables (per-service and shared), Reference Variables for cross-service secret injection, Service Tokens, project tokens, GitHub OAuth integration scope, secret rotation, deployment protection (Pro plan), and audit log access. Use when wiring secrets, scoping service access, rotating credentials, reviewing team permissions, or hardening a production project."
+        },
+        {
+          "slug": "railway-services",
+          "description": "Design, configure, or audit Railway Services — build source selection (Git repo / Dockerfile / pre-built image), Nixpacks auto-detect vs custom Dockerfile, build and start command overrides, restart policy, health checks, replicas (Pro plan), Volumes for persistent disk, and resource limits (vCPU + memory). Use when adding a new service, tuning build behavior, configuring persistent storage, or right-sizing resources."
+        },
+        {
+          "slug": "railway-templates-and-deployment",
+          "description": "Design or audit Railway deployment configuration — `railway.json` / `railway.toml` (build and deploy config), Railway CLI (≥ 3.x), Railway Templates (publishing and consuming), GitHub Actions integration with project tokens, environment promotion (dev → staging → production), preview environments (PR-based), and Volumes lifecycle in deploys. Use when configuring a deployment pipeline, publishing a Template, setting up preview environments, or promoting between environments."
+        }
+      ]
+    },
+    {
+      "name": "cloud-render",
+      "prefix": "render",
+      "description": "Render development toolkit — Web Services, Background Workers, Cron Jobs, Static Sites, Managed Postgres / Redis, Disks, and Blueprints (IaC).",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "render-blueprints-and-deployment",
+          "description": "Design or audit Render Blueprints and deployment — render.yaml Blueprint IaC (the recommended path), PR Preview environments, build / start commands, build caching, secret env var management, render-cli, Terraform render-oss/render provider, GitHub / GitLab integration. Use when setting up a new Blueprint, configuring preview environments, or reviewing a deployment pipeline."
+        },
+        {
+          "slug": "render-identity-and-security",
+          "description": "Design or audit Render identity and security posture — Teams and member roles, Personal API tokens, Environment Groups, Secret Files, IP Access Control, SSO, SOC 2 posture, audit logs, GitHub/GitLab OAuth scopes. Use when configuring team access, managing secrets, reviewing credential hygiene, or hardening a Render account."
+        },
+        {
+          "slug": "render-networking-and-edge",
+          "description": "Design or audit Render networking and edge — custom domains with automatic TLS, Private Services mesh, HTTP/2, IP allowlists, DDoS posture, regional placement, and HTTPS enforcement. Use when exposing a service, connecting services internally, restricting access, or reviewing edge security."
+        },
+        {
+          "slug": "render-observability-and-cost",
+          "description": "Wire up or audit Render observability and cost — built-in metrics (CPU, memory, request rate, response time), log streams and retention, Datadog / New Relic / Logtail integrations, alerts, billing by service plan and hours, free tier limits, and plan upgrade decisions. Use when adding telemetry, diagnosing a regression, or sizing a cost review."
+        },
+        {
+          "slug": "render-services",
+          "description": "Choose, design, or harden Render compute — Web Services (autoscale, zero-downtime deploys, custom domains, health checks), Private Services (internal-only), Background Workers, Cron Jobs, Static Sites, image-based vs runtime builds, service plans. Use when picking a service type, sizing a plan, configuring autoscaling, or reviewing a service architecture for cost and availability."
+        },
+        {
+          "slug": "render-storage-and-databases",
+          "description": "Design or audit Render storage and database tiers — Managed Postgres (HA + replicas + PITR), Managed Redis (Valkey), Persistent Disks (single-AZ). Use when choosing a data store, sizing a database, configuring backups, planning recovery drills, or understanding the single-AZ limitation of Persistent Disks."
+        }
+      ]
+    },
+    {
+      "name": "cloud-scaleway",
+      "prefix": "scaleway",
+      "description": "Scaleway development toolkit — domain skills, SME sub-agents, slash commands for IaC scaffolding and architecture review. EU data residency, Kapsule, Serverless Containers, Object Storage, and IAM.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "scaleway-compute",
+          "description": "Choose, design, or harden Scaleway compute — Instances (Development / General Purpose / Compute Optimized / Enterprise / GPU / ARM), Elastic Metal (Bare Metal), Serverless Containers, Serverless Jobs, Serverless Functions, Kapsule (Kubernetes), Kosmos (multi-cloud Kubernetes), Apple Silicon (Mac mini M1). Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost / latency / availability."
+        },
+        {
+          "slug": "scaleway-iac-and-deployment",
+          "description": "Choose, scaffold, or review Scaleway Infrastructure-as-Code and deployment — scw CLI, Terraform scaleway/scaleway provider, Pulumi pulumiverse/scaleway (community), Crossplane, GitOps with Kapsule, GitHub Actions OIDC patterns. Use when starting a new IaC project, picking a tool, or hardening a release path."
+        },
+        {
+          "slug": "scaleway-identity-and-security",
+          "description": "Design or audit Scaleway identity, access, and security posture — IAM (Organizations, Projects, Applications, Groups, Policies), Secret Manager, Key Manager (KMS), Audit Trail, OAuth tokens, MFA, SOC 2 / ISO 27001 / HDS certifications. Use when writing policies, rotating secrets, scoping application access, or hardening an Organization."
+        },
+        {
+          "slug": "scaleway-networking",
+          "description": "Design or audit Scaleway networking — VPC (with Private Networks per region), Public Gateways (egress + NAT), Load Balancers, Edge Services (CDN), Domains / DNS, IPv4 / IPv6 pools, Reserved IPs. Use when standing up a new VPC, exposing a service, hardening edge, or tracking down NAT / egress data costs."
+        },
+        {
+          "slug": "scaleway-observability-and-cost",
+          "description": "Wire up or audit Scaleway observability and cost — Cockpit (managed Grafana + metrics + logs), Cost Manager, Organization-level billing, Resource Tag filters, log retention tiers, alerting through Cockpit. Use when adding telemetry, tracking down a regression, building dashboards, or shrinking a bill."
+        },
+        {
+          "slug": "scaleway-storage-and-databases",
+          "description": "Design or audit Scaleway storage and database tiers — Object Storage (S3-compatible, Standard / Glacier), Block Storage (SBS 5K / 15K IOPS), Managed Databases (Postgres, MySQL), Serverless SQL (scale-to-zero Postgres), Managed Document Database (MongoDB-compat), Redis Cluster, IoT Hub. Use when picking a data store, modeling access patterns, sizing, securing, or backing up data."
+        }
+      ]
+    },
+    {
+      "name": "cloud-supabase",
+      "prefix": "supabase",
+      "description": "Supabase development toolkit — Postgres, Auth, Row Level Security, Storage, Realtime, Edge Functions, Vector / pgvector, migrations, and self-hosting.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "supabase-auth",
+          "description": "Design or implement Supabase Auth — email/password, magic links, OAuth providers, phone/SMS, MFA (TOTP and WebAuthn/passkeys), JWT structure and custom claims, auth hooks, session management, server-side auth with cookies, and auth redirects. Use when choosing an auth method, designing a user flow, auditing JWT handling, or wiring auth hooks."
+        },
+        {
+          "slug": "supabase-deployment-and-iac",
+          "description": "Design or implement Supabase deployment workflows — CLI (init, link, db push, db diff, migrations), supabase/config.toml, GitHub Actions pipelines for migrations and Edge Functions, environment promotion (local → dev → staging → prod), database branching with PR previews, self-hosting via Docker or Kubernetes, and Terraform with the supabase/supabase provider. Use when setting up a new project, wiring CI/CD, or planning self-hosting."
+        },
+        {
+          "slug": "supabase-edge-functions-and-vector",
+          "description": "Build or audit Supabase Edge Functions (Deno runtime, secrets, regions, background tasks, WebSockets, scheduled functions via pg_cron) and Vector / pgvector (HNSW vs IVF indexes, embedding workflows, Supabase AI client, OpenAI / Anthropic / local model integration). Use when writing server-side logic at the edge, scheduling jobs, or implementing semantic search and retrieval-augmented generation."
+        },
+        {
+          "slug": "supabase-postgres-and-rls",
+          "description": "Design or audit Supabase Postgres schemas, Row Level Security (RLS) policies, roles, migrations, connection pooling (Supavisor), read replicas, database branching, and point-in-time recovery. Use when modeling data, writing policies, sizing a database, or reviewing the security posture of a schema."
+        },
+        {
+          "slug": "supabase-security-and-compliance",
+          "description": "Audit or harden the security posture of a Supabase project — RLS coverage on every table, service_role discipline, JWT verification, secret management, database password rotation, MFA enforcement, network restrictions (IP allowlists), SOC 2 Type II / HIPAA tier requirements, and audit logging. Use when reviewing a project before launch, running a security audit, or responding to a compliance requirement."
+        },
+        {
+          "slug": "supabase-storage-and-realtime",
+          "description": "Design or implement Supabase Storage (buckets, RLS for objects, image transformations, signed URLs, resumable uploads via TUS) and Realtime (Postgres changes via WAL, Broadcast, Presence, channel auth, scaling). Use when storing files, serving user-generated content, streaming database changes, or building collaborative features."
+        }
+      ]
+    },
+    {
+      "name": "cloud-tencent",
+      "prefix": "tencent",
+      "description": "Tencent Cloud development toolkit — CVM, TKE Kubernetes, SCF (serverless), COS object storage, TencentDB, VPC, CAM IAM, and CDN. APAC and China-region patterns.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "tencent-compute",
+          "description": "Choose, design, or harden Tencent Cloud compute — CVM (Standard / High IO / Memory Optimized / Compute Optimized / GPU), Lighthouse VPS, TKE Kubernetes (Standard / Serverless / Edge), EKS serverless k8s, SCF serverless functions, BatchCompute, CFS Container Service. Use when picking a runtime, sizing capacity, configuring autoscaling, or reviewing a compute architecture for cost / latency / availability."
+        },
+        {
+          "slug": "tencent-iac-and-deployment",
+          "description": "Choose, scaffold, or review Tencent Cloud Infrastructure-as-Code and deployment — Tencent Cloud CLI (tccli), Terraform tencentcloudstack/tencentcloud provider, TIC (Tencent Infrastructure-as-Code managed Terraform runner), Coding DevOps CI/CD, GitOps for TKE, GitHub Actions and Jenkins integrations. Use when starting a new IaC project, picking a tool, or hardening a release pipeline."
+        },
+        {
+          "slug": "tencent-identity-and-security",
+          "description": "Design or audit Tencent Cloud identity, access, and security posture — CAM (users, groups, roles, policies), SSO and federated identity, SSM Secrets Manager, KMS (Standard + HSM), Cloud Firewall, CWP (Cloud Workload Protection), CSI (Cloud Security Inspection), CloudAudit. Use when writing policies, scoping roles, rotating secrets, standing up SSO, or hardening an account."
+        },
+        {
+          "slug": "tencent-networking-and-edge",
+          "description": "Design or audit Tencent Cloud networking and edge — VPC, subnets, route tables, CLB (Classic + Application L4/L7), NAT Gateway, EIP, DNSPod, CDN, EdgeOne (CDN + WAF + DDoS + Workers), Anti-DDoS (Basic / Advanced / Pro), WAF, VPN Connections, Direct Connect, Cloud Connect Network (CCN). Use when standing up a new VPC, exposing a service publicly, or hardening edge posture."
+        },
+        {
+          "slug": "tencent-observability-and-cost",
+          "description": "Wire up or audit Tencent Cloud observability and cost — Cloud Monitor (metrics, alarms, dashboards), CLS (Cloud Log Service — collection, search, dashboards), APM, COC (Cloud Operations Center), Cost Manager (bills, budget, cost allocation tags), reservation and savings models. Use when adding telemetry, tracking a performance regression, or optimizing a bill."
+        },
+        {
+          "slug": "tencent-storage-and-databases",
+          "description": "Design or audit Tencent Cloud storage and database tiers — COS object storage, CBS block storage, CFS file storage, CDB MySQL, TDSQL (distributed SQL), MariaDB, DocumentDB (MongoDB-compatible), Redis, ClickHouse, Tendis, HBase, SQL Server. Use when picking a data store, modeling access patterns, sizing, securing, or designing backup and replication."
+        }
+      ]
+    },
+    {
+      "name": "cloud-vercel",
+      "prefix": "vercel",
+      "description": "Vercel development toolkit — Next.js deployments, Edge Functions, Edge Middleware, Image Optimization, KV / Postgres / Blob, ISR, and monorepos.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "vercel-data",
+          "description": "Choose and configure Vercel-native data stores — Vercel KV (Upstash Redis), Vercel Postgres (Neon-backed), Vercel Blob (object storage), Edge Config (low-latency read-only), and marketplace integrations (Neon, Upstash, MongoDB Atlas, Supabase). Use when picking a data layer for a Vercel project, sizing storage, or evaluating portability tradeoffs."
+        },
+        {
+          "slug": "vercel-deployments",
+          "description": "Design, configure, or debug Vercel deployments — Production / Preview / Branch deploys, Git integrations (GitHub / GitLab / Bitbucket), monorepo configuration, build caching, build environment variables, framework presets (Next.js / SvelteKit / Astro / Remix / Nuxt / Vite), build skipping, and immutable deployments. Use when setting up a new project, tuning build performance, diagnosing a failed deploy, or choosing framework preset settings."
+        },
+        {
+          "slug": "vercel-functions-and-edge",
+          "description": "Design or configure Vercel compute — Edge Functions (V8 isolates), Edge Middleware, Serverless Functions (Node.js / Python), Streaming responses, ISR and on-demand revalidation, Image Optimization, Cron Jobs, Edge Config, and function memory / duration limits per plan. Use when choosing where to run code, tuning cold start, implementing middleware, or wiring ISR revalidation."
+        },
+        {
+          "slug": "vercel-iac-and-deployment",
+          "description": "Configure or audit Vercel deployment infrastructure — vercel.json (rewrites, redirects, headers, function config), Vercel CLI, Git integration vs vercel deploy, GitHub Actions for PR previews and production deploys, Turborepo for monorepos, environment variable promotion (Dev → Preview → Production), and the community Terraform vercel/vercel provider. Use when setting up a new project's deployment pipeline, debugging routing, or codifying Vercel config in IaC."
+        },
+        {
+          "slug": "vercel-identity-and-security",
+          "description": "Design or audit Vercel identity and security posture — team membership and roles, Project / Team access controls, Vercel Authentication (SSO), Deployment Protection (Vercel Auth, Password, Trusted IPs, Bypass tokens), WAF (custom + managed rules), DDoS mitigation, Attack Challenge Mode, environment variable encryption, and Sensitive flag usage. Use when hardening a project before launch, onboarding a new team, or auditing access controls."
+        },
+        {
+          "slug": "vercel-observability-and-cost",
+          "description": "Wire up or audit Vercel observability and cost — Web Analytics (privacy-first, no cookies), Speed Insights (Core Web Vitals), Logs (real-time + Logs Drains to Datadog / Logflare / etc.), OpenTelemetry traces, Spend Management (budgets, hard limits), and tracking edge / function / bandwidth / image-optimization consumption. Use when adding telemetry, investigating a performance regression, or controlling a growing bill."
+        }
+      ]
+    },
+    {
+      "name": "cloud-vultr",
+      "prefix": "vultr",
+      "description": "Vultr development toolkit — Cloud Compute, Bare Metal, VKE Kubernetes, Object Storage, Managed Databases, Load Balancers, and VPC 2.0.",
+      "version": "0.1.0",
+      "skill_count": 6,
+      "skills": [
+        {
+          "slug": "vultr-compute",
+          "description": "Choose, design, or harden Vultr compute — Cloud Compute (Regular, High Performance, High Frequency, High Optimized AMD/Intel), Cloud GPU (NVIDIA fractional and dedicated), Bare Metal, Vultr Kubernetes Engine (VKE), Marketplace apps, ISO uploads, snapshots, startup scripts. Use when picking an instance plan, sizing capacity, designing a Kubernetes cluster, or auditing compute configuration."
+        },
+        {
+          "slug": "vultr-iac-and-deployment",
+          "description": "Choose, scaffold, or review Vultr Infrastructure-as-Code and deployment — vultr-cli (vultr CLI), Terraform vultr/vultr provider, Packer Vultr plugin, Ansible inventory plugin, cloud-init, GitHub Actions deploy, snapshot lifecycle. Use when starting a new IaC project for Vultr, designing a deployment pipeline, or auditing an existing IaC repo for drift and security posture."
+        },
+        {
+          "slug": "vultr-networking",
+          "description": "Design or audit Vultr networking — VPC 2.0 (modern regional software-defined network), Load Balancers (regional), Reserved IPs, Firewall Groups (account-wide policy sets), DDoS Protection (paid add-on per region), DNS, IPv6. Use when designing network topology, exposing a service publicly, hardening edge, or auditing connectivity between instances."
+        },
+        {
+          "slug": "vultr-observability-and-cost",
+          "description": "Wire up or audit Vultr observability and cost — built-in metrics (CPU / memory / network / disk), Alerts, third-party observability via standard agents (Prometheus node exporter, Datadog agent, Grafana Alloy), billing model (hourly with monthly cap), bandwidth pool model and per-TB overage, and free-transfer differences across regions. Use when adding telemetry, wiring alerts, diagnosing a performance regression, or reviewing a Vultr bill."
+        },
+        {
+          "slug": "vultr-security",
+          "description": "Design or audit Vultr security posture — Firewall Groups and per-instance application, SSH key management, API Access keys (account level, scope carefully), 2FA enforcement, sub-accounts (limited RBAC), audit log access, and public IP discipline. Use when hardening an account, reviewing access controls, rotating credentials, or designing a least-privilege posture."
+        },
+        {
+          "slug": "vultr-storage-and-databases",
+          "description": "Design or audit Vultr storage and database tiers — Block Storage (HDD vs NVMe), Object Storage (S3-compatible), Backups, Managed Databases (Postgres, MySQL, Redis/Valkey, Kafka) with HA tiers and replicas, and restore drills. Use when picking a data store, sizing, securing, setting up replication, or running a backup restore drill."
+        }
+      ]
+    }
+  ]
+}

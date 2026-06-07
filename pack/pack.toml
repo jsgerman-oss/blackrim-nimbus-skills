@@ -15,16 +15,22 @@
 # What this pack provides (all convention-discovered once the pack is imported):
 #   bin/nimbus                      the app-scaffold + deploy-readiness CLI
 #   nimbus/                         the engine (pure-stdlib): golden + scaffold + readiness
+#   nimbus/providers.json           generated 19-provider breadth index (nim-6y5)
 #   skills/golden-path-hosting/     the golden-path deploy skill (vite+voidzero+cloudflare+convex)
-#   skills/...                      19 provider skills curated in (nim-6y5)
+#   docs/PROVIDERS.md               golden-path <-> provider-breadth mapping (nim-6y5)
 #   docs/DESIGN.md                  the pack's design, scope, and scope boundaries
+#
+# The breadth (19 providers) is surfaced through `nimbus providers`, which reads the
+# generated providers.json — not duplicated as skill files. The index is regenerated
+# (npm run regen:pack-providers) and drift-checked (pack-providers-in-sync rule), so
+# the pack's snapshot never diverges from the cloud-* plugins it curates.
 #
 # Stdlib-only python (tomllib on Python >= 3.11; tomli fallback below it). No
 # runtime third-party dependencies — it mirrors gascity-cockpit / provider-forge.
 #
-# STATUS: the engine + CLI (nim-rsa), the golden-path skill (nim-ulq), and
-# launch-quality docs/tests (nim-114) have landed; provider-skill curation (nim-6y5)
-# is the remaining follow-up. Read docs/DESIGN.md before extending.
+# STATUS: the golden-path skill (nim-ulq), the engine + CLI (nim-rsa), launch-quality
+# docs/tests (nim-114), and provider-skill curation (nim-6y5) have all landed. Read
+# docs/DESIGN.md before extending.
 
 [pack]
 name = "nimbus"

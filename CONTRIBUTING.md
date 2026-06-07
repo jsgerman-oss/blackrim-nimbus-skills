@@ -14,11 +14,13 @@ Thanks for the interest. This is a Claude Code plugin marketplace for cloud-deve
 │   ├── check-plugins                 # validator engine (iterates rule registry)
 │   ├── regen-marketplace             # rebuild marketplace.json from plugin.json
 │   ├── regen-plugin-readmes          # rebuild each plugin README's "What's inside" region
+│   ├── regen-pack-providers          # rebuild pack/nimbus/providers.json from cloud-* manifests
 │   ├── list-rules                    # print the validator rule registry
 │   ├── list-checklist                # print verification checklists for a plugin
 │   └── lib/
 │       ├── rules.js                  # rule registry — the contract, in code
 │       ├── marketplace.js            # plugin discovery + index projection
+│       ├── providers.js              # pack provider-breadth index builder
 │       ├── plugin-readme.js          # plugin README region builder
 │       └── skill.js                  # frontmatter, section, checklist parsers
 ├── cloud-<provider>/                 # one directory per cloud
@@ -35,7 +37,7 @@ Thanks for the interest. This is a Claude Code plugin marketplace for cloud-deve
 
 1. **Create the directory** `cloud-<provider>/` and the standard subdirs (`skills/`, `agents/`, `commands/`, `.claude-plugin/`).
 2. **Write `plugin.json`** with `name`, `description`, `version`, `author`, `license`, `keywords`, and `prefix`. `prefix` is the slug every skill, agent, and command in your plugin uses (e.g. `aws`, `cf`, `do`). It does not have to match the plugin name — `cloud-cloudflare` uses prefix `cf`.
-3. **Regenerate `marketplace.json`.** Run `npm run regen:marketplace`. The index is derived from each plugin's `plugin.json` — do not edit it by hand.
+3. **Regenerate the derived indexes.** Run `npm run regen` — it rebuilds `marketplace.json` (derived from each plugin's `plugin.json`) and the nimbus pack's `providers.json` (derived from the `cloud-*` manifests + skills). Don't edit either by hand.
 4. **Write the six skills**: by convention, every cloud covers six domains —
    - `<provider>-compute`
    - `<provider>-storage-and-databases`
@@ -127,9 +129,10 @@ git clone <repo>
 cd blackrim-nimbus-skills
 npm install                            # one-time
 npm run check                          # validate everything (CI runs this)
-npm run regen                          # rebuild marketplace.json + every plugin README's "What's inside"
+npm run regen                          # rebuild marketplace.json + plugin READMEs + pack provider index
 npm run regen:marketplace              # marketplace.json only
 npm run regen:plugin-readmes           # plugin READMEs only
+npm run regen:pack-providers           # pack/nimbus/providers.json only
 npm run rules                          # list every validator rule
 npm run checklist cloud-aws            # print verification checklists for a plugin
 npm run checklist cloud-aws aws-compute --json  # JSON for one skill
@@ -150,7 +153,7 @@ Rules are scoped to one of: `marketplace`, `plugin`, `skill`, `agent`, or `comma
 - **Skill body** (`skill-has-verification-checklist`, `skill-checklist-has-items`): every `SKILL.md` ends with a `## Verification checklist` section containing at least one `- [ ]` item. This is the load-bearing section — it gates "done."
 - **Agent frontmatter** (`agent-tools-match-role`, `agent-model-is-sonnet`): architect uses `tools: Read, Glob, Grep, WebFetch`; security-reviewer uses `tools: Read, Glob, Grep, Bash, WebFetch`; both use `model: sonnet`.
 - **Agent structure** (`architect-required-sections`, `security-reviewer-required-sections`): each role has canonical body sections. Architect: `Inputs you expect`, `Review process`, `Output format`, `Rules of engagement`. Security-reviewer: `Inputs`, `Review scope — what you check`, `Output`, `Rules of engagement`. The pillar list and review-scope topics are per-provider.
-- **Drift** (`marketplace-in-sync-with-plugins`, `plugin-readme-in-sync`): generated files match their regen output. `marketplace.json` is derived from each `plugin.json`; every plugin README's `<!-- BEGIN: what's inside -->`…`<!-- END: what's inside -->` region is derived from on-disk skills/agents/commands. Run `npm run regen` after adding or renaming files.
+- **Drift** (`marketplace-in-sync-with-plugins`, `plugin-readme-in-sync`, `pack-providers-in-sync`): generated files match their regen output. `marketplace.json` is derived from each `plugin.json`; every plugin README's `<!-- BEGIN: what's inside -->`…`<!-- END: what's inside -->` region is derived from on-disk skills/agents/commands; and the nimbus pack's `pack/nimbus/providers.json` (its 19-provider breadth index) is derived from the `cloud-*` manifests + skills. Run `npm run regen` after adding or renaming files.
 
 Flags: `npm run check -- --rule <id>` runs one rule; `--skip <id>` skips one; `--json` machine-readable output.
 

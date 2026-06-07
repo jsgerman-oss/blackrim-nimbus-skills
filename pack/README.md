@@ -6,24 +6,27 @@ companion to this repo's 19 per-provider Claude Code plugins (`cloud-*/`) — th
 teach Claude each cloud's well-architected defaults; this pack turns that into a
 **golden path** plus **breadth** across all 19 clouds.
 
-> **Status:** the engine + CLI (`nim-rsa`), the `golden-path-hosting` skill
-> (`nim-ulq`), and launch-quality docs/tests (`nim-114`) have landed. Still open:
-> curating the 19 provider skills into the pack (`nim-6y5`). Read
-> [`docs/DESIGN.md`](docs/DESIGN.md) for the full scope before extending.
+> **Status:** the `golden-path-hosting` skill (`nim-ulq`), the engine + CLI
+> (`nim-rsa`) — `scaffold` / `readiness` / `providers` work — launch-quality
+> docs/tests (`nim-114`), and the 19-provider curation (`nim-6y5`) have all landed.
+> Read [`docs/DESIGN.md`](docs/DESIGN.md) for the full scope before extending.
 
 ## What it provides
 
 | Path | Role |
 |------|------|
-| `bin/nimbus` | the app-scaffold + deploy-readiness CLI |
+| `bin/nimbus` | the app-scaffold + deploy-readiness + provider-browse CLI |
 | `nimbus/` | the pure-stdlib engine: `golden` (knowledge) + `scaffold` (write) + `readiness` (assess) |
+| `nimbus/providers.json` | generated index of the 19 cloud providers + their skills (`nim-6y5`) |
 | `skills/golden-path-hosting/` | the golden-path deploy skill — zero to a live URL |
+| `docs/PROVIDERS.md` | golden-path ↔ provider-breadth mapping (`nim-6y5`) |
 | `docs/DESIGN.md` | the pack's design, scope, and scope boundaries |
 
 - **Golden path:** vite + voidzero + cloudflare + convex.
 - **Breadth:** 19 providers — alibaba, aws, azure, cloudflare, digitalocean, fly,
   gcp, hetzner, ibm, linode, netlify, oci, railway, render, scaleway, supabase,
-  tencent, vercel, vultr — curated as skills (`nim-6y5`).
+  tencent, vercel, vultr — reachable via `nimbus providers` and mapped to the golden
+  path in [`docs/PROVIDERS.md`](docs/PROVIDERS.md) (`nim-6y5`).
 
 Stdlib-only (`tomllib` ≥3.11 / `tomli` fallback). No overlay, no hooks, no prompt
 fragments — mirrors `gascity-cockpit` / `provider-forge`'s minimal footprint.
@@ -37,14 +40,18 @@ fragments — mirrors `gascity-cockpit` / `provider-forge`'s minimal footprint.
 # what is this pack, and what does it do?
 ./bin/nimbus info
 
-# the golden path + the 19 curated clouds (the breadth escape hatch)
+# browse the 19 clouds behind the golden path, or one provider's skills
 ./bin/nimbus providers
+./bin/nimbus providers cloudflare
 
 # scaffold a new golden-path app into ./myapp/
 ./bin/nimbus scaffold myapp
 
 # is a scaffolded app ready to deploy? (files + creds + toolchain)
 ./bin/nimbus readiness ./myapp
+
+# version (text or JSON)
+./bin/nimbus version --json
 ```
 
 ### Commands
@@ -52,13 +59,15 @@ fragments — mirrors `gascity-cockpit` / `provider-forge`'s minimal footprint.
 | Command | What it does |
 |---------|--------------|
 | `nimbus version [--json]` | print the pack version |
-| `nimbus info [--json]` | pack identity, the golden path, and the remaining roadmap |
+| `nimbus info [--json]` | pack identity, the golden path, and the build-out roadmap |
 | `nimbus scaffold NAME [--dir DIR] [--force] [--json]` | scaffold a golden-path app (vite + voidzero + cloudflare + convex) into `DIR/NAME` (default `DIR` = cwd; `--force` to write into a non-empty dir) |
 | `nimbus readiness [DIR] [--json]` | check a scaffolded app's deploy readiness — required files present, deploy creds (`CLOUDFLARE_API_TOKEN`, `CONVEX_DEPLOY_KEY`) in the environment, and the `node`/`npm`/`npx` toolchain on PATH |
-| `nimbus providers [--json]` | list the golden path + the 19 curated cloud providers |
+| `nimbus providers [name] [--json]` | list the 19 curated cloud providers behind the golden path; pass a provider (e.g. `aws` or `cloud-aws`) to list its skills |
 
 `readiness` exits `0` when deploy-ready, `1` when something is missing, and `2`
 when the directory does not exist — so it slots into a deploy script's gate.
+`providers` exits `2` when its index is unavailable or the named provider is
+unknown.
 
 A scaffolded app drops a `.nimbus.json` marker recording the stack and its
 deploy-readiness requirements; `readiness` reads it back (and falls back to the
@@ -81,7 +90,7 @@ smoke). Reverse with `uninstall.sh` (same scope flags; `--purge` to drop the ven
 ## Tests
 
 ```bash
-python3 -m pytest -q          # 44 tests: golden + scaffold + readiness + cli + bin wrapper (no network)
+python3 -m pytest -q          # 49 tests: golden + scaffold + readiness + cli + bin wrapper (no network)
 python3 tests/test_cli.py     # or the fixture-free CLI smoke subset, standalone
 ```
 

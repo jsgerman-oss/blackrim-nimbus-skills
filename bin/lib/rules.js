@@ -6,7 +6,7 @@
 // Rules return arrays of { label, message } — the engine adds id + severity.
 //
 // Scopes:
-//   'marketplace'  — runs once with { marketplace, plugins, repoRoot, regenerated }
+//   'marketplace'  — runs once with { marketplace, plugins, repoRoot, regenerated, packProviders }
 //   'plugin'       — runs per plugin with { plugin, repoRoot }
 //   'skill'        — runs per skill with { skill, plugin, repoRoot }
 //   'agent'        — runs per agent with { agent, plugin, repoRoot }
@@ -75,6 +75,28 @@ export const rules = [
       return [{
         label: "marketplace.json",
         message: "out of sync with plugin manifests — run 'npm run regen:marketplace' to update.",
+      }];
+    },
+  },
+
+  // --- Pack (nimbus) -----------------------------------------------------
+  {
+    id: "pack-providers-in-sync",
+    scope: "marketplace",
+    severity: "error",
+    description: "pack/nimbus/providers.json equals the regen output (the cloud-* plugin manifests + skills are authoritative).",
+    check({ packProviders }) {
+      // No-ops when the pack is absent (packProviders is null) so the
+      // validator stays correct in a checkout that has dropped the pack.
+      if (!packProviders) return [];
+      const { regenSerialized, onDiskRaw, relPath } = packProviders;
+      if (onDiskRaw == null) {
+        return [{ label: relPath, message: "missing — run 'npm run regen:pack-providers' to generate the pack's provider index." }];
+      }
+      if (onDiskRaw === regenSerialized) return [];
+      return [{
+        label: relPath,
+        message: "out of sync with the cloud-* plugins — run 'npm run regen:pack-providers' to update.",
       }];
     },
   },
