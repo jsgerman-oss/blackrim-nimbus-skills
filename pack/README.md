@@ -6,19 +6,19 @@ companion to this repo's 19 per-provider Claude Code plugins (`cloud-*/`) — th
 teach Claude each cloud's well-architected defaults; this pack turns that into a
 **golden path** plus **breadth** across all 19 clouds.
 
-> **Status:** the CLI engine landed (`nim-rsa`) — `scaffold` / `readiness` /
-> `providers` work. The golden-path skill (`nim-ulq`), the 19-provider curation
-> (`nim-6y5`), and launch-quality docs/tests (`nim-114`) land in the follow-up
-> beads. Read [`docs/DESIGN.md`](docs/DESIGN.md) before extending.
+> **Status:** the engine + CLI (`nim-rsa`), the `golden-path-hosting` skill
+> (`nim-ulq`), and launch-quality docs/tests (`nim-114`) have landed. Still open:
+> curating the 19 provider skills into the pack (`nim-6y5`). Read
+> [`docs/DESIGN.md`](docs/DESIGN.md) for the full scope before extending.
 
 ## What it provides
 
 | Path | Role |
 |------|------|
-| `bin/nimbus` | the app-scaffold + deploy-readiness CLI (`nim-rsa`) |
-| `nimbus/` | the pure-stdlib engine: `golden` + `scaffold` + `readiness` (`nim-rsa`) |
-| `skills/golden-path-hosting/` | the golden-path deploy skill (placeholder; `nim-ulq`) |
-| `docs/DESIGN.md` | the pack's design + scope (stub; `nim-114`) |
+| `bin/nimbus` | the app-scaffold + deploy-readiness CLI |
+| `nimbus/` | the pure-stdlib engine: `golden` (knowledge) + `scaffold` (write) + `readiness` (assess) |
+| `skills/golden-path-hosting/` | the golden-path deploy skill — zero to a live URL |
+| `docs/DESIGN.md` | the pack's design, scope, and scope boundaries |
 
 - **Golden path:** vite + voidzero + cloudflare + convex.
 - **Breadth:** 19 providers — alibaba, aws, azure, cloudflare, digitalocean, fly,
@@ -81,9 +81,13 @@ smoke). Reverse with `uninstall.sh` (same scope flags; `--purge` to drop the ven
 ## Tests
 
 ```bash
-python3 -m pytest -q          # full suite: cli + golden + scaffold + readiness (no network)
+python3 -m pytest -q          # 44 tests: golden + scaffold + readiness + cli + bin wrapper (no network)
 python3 tests/test_cli.py     # or the fixture-free CLI smoke subset, standalone
 ```
+
+Pure stdlib + pytest, fully hermetic — `scaffold` writes under a tmp dir and
+`readiness` is fed an injected env + `which`, so the suite never touches real
+secrets, PATH, or the network.
 
 ## License
 

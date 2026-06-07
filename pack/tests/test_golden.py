@@ -42,6 +42,23 @@ def test_golden_path_string():
     assert golden.golden_path() == "vite + voidzero + cloudflare + convex"
 
 
+def test_stack_order_covers_every_layer():
+    # golden_path() renders STACK in STACK_ORDER; if the order list ever drifts from
+    # the stack it would silently drop (or KeyError on) a layer. Pin them together.
+    assert set(golden.STACK_ORDER) == set(golden.STACK)
+    rendered = golden.golden_path()
+    for layer in golden.STACK.values():
+        assert layer in rendered
+
+
+def test_env_example_documents_the_required_creds():
+    # The scaffolded app's .env.example must document exactly the deploy creds that
+    # `nimbus readiness` asserts — otherwise a user has no pointer to what to set.
+    env_example = golden.render_files("demo")[".env.example"]
+    for var in golden.REQUIRED_ENV:
+        assert var in env_example, var
+
+
 def test_render_files_present_and_parseable():
     files = golden.render_files("demo")
     # name substitution happened (sentinel gone, name present)

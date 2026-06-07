@@ -86,6 +86,28 @@ def test_no_marker_falls_back_to_golden_defaults(tmp_path):
     assert v["ready"] is True
 
 
+def test_malformed_marker_is_ignored(tmp_path):
+    # A corrupt .nimbus.json must not crash the check: read_marker swallows the
+    # decode error, the dir is treated as not-a-nimbus-app, and requirements fall
+    # back to the golden defaults.
+    proj = tmp_path / "broken"
+    proj.mkdir()
+    (proj / readiness.MARKER).write_text("{ this is not json")
+    assert readiness.read_marker(str(proj)) is None
+    v = readiness.check_readiness(str(proj), env=_FULL_ENV, which=_all_tools)
+    assert v["is_nimbus_app"] is False
+    assert set(v["missing_files"]) == set(golden.REQUIRED_FILES)  # golden defaults
+
+
+def test_non_object_marker_is_ignored(tmp_path):
+    # Valid JSON but not an object (e.g. a list) is also rejected — read_marker only
+    # accepts a dict.
+    proj = tmp_path / "listmarker"
+    proj.mkdir()
+    (proj / readiness.MARKER).write_text("[1, 2, 3]")
+    assert readiness.read_marker(str(proj)) is None
+
+
 def test_marker_requirements_are_authoritative(tmp_path):
     # A marker that declares a custom required file drives the check (data-driven).
     proj = tmp_path / "custom"

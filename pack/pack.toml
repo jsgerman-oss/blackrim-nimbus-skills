@@ -13,18 +13,18 @@
 # scaleway, supabase, tencent, vercel, vultr — surfaced as curated skills.
 #
 # What this pack provides (all convention-discovered once the pack is imported):
-#   bin/nimbus                      the app-scaffold + deploy CLI (stub; nim-rsa)
-#   nimbus/                         the engine (pure-stdlib; stub; nim-rsa)
-#   skills/golden-path-hosting/     the golden-path deploy skill (placeholder; nim-ulq)
+#   bin/nimbus                      the app-scaffold + deploy-readiness CLI
+#   nimbus/                         the engine (pure-stdlib): golden + scaffold + readiness
+#   skills/golden-path-hosting/     the golden-path deploy skill (vite+voidzero+cloudflare+convex)
 #   skills/...                      19 provider skills curated in (nim-6y5)
-#   docs/DESIGN.md                  the pack's design + scope (stub; nim-114)
+#   docs/DESIGN.md                  the pack's design, scope, and scope boundaries
 #
 # Stdlib-only python (tomllib on Python >= 3.11; tomli fallback below it). No
 # runtime third-party dependencies — it mirrors gascity-cockpit / provider-forge.
 #
-# STATUS: v1 SCAFFOLD (nim-bam). Only the structure + manifests land here; the CLI
-# engine, golden-path skill, provider curation, and launch-quality docs/tests land
-# in the follow-up beads named above. Read docs/DESIGN.md before extending.
+# STATUS: the engine + CLI (nim-rsa), the golden-path skill (nim-ulq), and
+# launch-quality docs/tests (nim-114) have landed; provider-skill curation (nim-6y5)
+# is the remaining follow-up. Read docs/DESIGN.md before extending.
 
 [pack]
 name = "nimbus"

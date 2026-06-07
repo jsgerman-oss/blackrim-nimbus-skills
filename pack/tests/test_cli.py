@@ -56,6 +56,14 @@ def test_info_text_shows_golden_path():
     assert "golden path: vite + voidzero + cloudflare + convex" in s
 
 
+def test_info_text_shows_providers_and_roadmap():
+    rc, s = run(["info"])
+    assert rc == 0
+    assert "providers:   19 clouds" in s
+    assert "Remaining roadmap:" in s
+    assert "nim-6y5" in s  # the still-open sibling is named in the roadmap
+
+
 def test_info_json_active_with_roadmap():
     rc, s = run(["info", "--json"])
     assert rc == 0
