@@ -42,10 +42,14 @@ no hooks, no prompt fragments.
 pack/
   pack.toml                     pack manifest ([pack] name/schema/version)
   bin/nimbus                    venv-resolving CLI wrapper -> python -m nimbus.cli
-  nimbus/                       pure-stdlib engine (__init__.py + cli.py)
+  nimbus/                       pure-stdlib engine
+    cli.py                      version/info/scaffold/readiness/providers commands
+    golden.py                   golden-path knowledge: stack, providers, templates
+    scaffold.py                 render golden.py into a new project tree
+    readiness.py                assess a project dir + env for deploy-readiness
   skills/golden-path-hosting/   golden-path deploy skill (placeholder; nim-ulq)
   docs/DESIGN.md                this document
-  tests/                        pytest smoke tests (pure stdlib, no network)
+  tests/                        pytest tests (pure stdlib, no network)
   setup.sh                      build the engine venv (idempotent)
   install.sh / uninstall.sh     reversible, idempotent import lifecycle
   requirements.txt              minimal (stdlib-only; guarded tomli fallback)
@@ -55,7 +59,9 @@ pack/
 This mirrors `gascity-cockpit/pack`. The nimbus pack deliberately does **not**
 ship a `contract/` directory or `contract.py`/`discovery.py` — those are
 cockpit-specific (the `/v0` API compatibility gate). nimbus's own engine modules
-(app scaffold + deploy helpers) land in nim-rsa.
+(app scaffold + deploy-readiness helpers) landed in nim-rsa: `golden.py` is the
+knowledge (the cockpit `contract.py` analogue), `scaffold.py` writes a project,
+and `readiness.py` assesses one.
 
 ## 4. Deployment
 
