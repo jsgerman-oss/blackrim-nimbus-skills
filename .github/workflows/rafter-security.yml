@@ -27,6 +27,6 @@ jobs:
         with:
           egress-policy: audit
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Rafter Security Scan
-        uses: Raftersecurity/rafter-cli@v0.8.4
+        uses: Raftersecurity/rafter-cli@v1
