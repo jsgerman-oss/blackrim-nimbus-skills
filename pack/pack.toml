@@ -1,0 +1,32 @@
+# nimbus — the cloud app-hosting enabler pack for a gas city.
+#
+# This pack makes a gas city *app-hosting-capable*: it gives agents a golden path
+# for standing up and deploying a new web app, plus breadth across the 19 cloud
+# providers curated in this marketplace (blackrim-nimbus-skills). It is the
+# city-side companion to the per-provider Claude Code plugins (cloud-*/) — those
+# teach Claude each cloud's well-architected defaults; this pack turns that
+# knowledge into a runnable scaffold + deploy workflow.
+#
+# Golden path (the opinionated default): vite + voidzero + cloudflare + convex.
+# Breadth (the escape hatch): 19 providers — alibaba, aws, azure, cloudflare,
+# digitalocean, fly, gcp, hetzner, ibm, linode, netlify, oci, railway, render,
+# scaleway, supabase, tencent, vercel, vultr — surfaced as curated skills.
+#
+# What this pack provides (all convention-discovered once the pack is imported):
+#   bin/nimbus                      the app-scaffold + deploy CLI (stub; nim-rsa)
+#   nimbus/                         the engine (pure-stdlib; stub; nim-rsa)
+#   skills/golden-path-hosting/     the golden-path deploy skill (placeholder; nim-ulq)
+#   skills/...                      19 provider skills curated in (nim-6y5)
+#   docs/DESIGN.md                  the pack's design + scope (stub; nim-114)
+#
+# Stdlib-only python (tomllib on Python >= 3.11; tomli fallback below it). No
+# runtime third-party dependencies — it mirrors gascity-cockpit / provider-forge.
+#
+# STATUS: v1 SCAFFOLD (nim-bam). Only the structure + manifests land here; the CLI
+# engine, golden-path skill, provider curation, and launch-quality docs/tests land
+# in the follow-up beads named above. Read docs/DESIGN.md before extending.
+
+[pack]
+name = "nimbus"
+schema = 2
+version = "0.1.0"

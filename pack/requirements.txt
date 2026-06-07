@@ -1,0 +1,10 @@
+# nimbus runtime deps — deliberately MINIMAL (mirrors gascity-cockpit / provider-forge).
+#
+# The engine is pure-stdlib: manifests are parsed with the stdlib `tomllib`
+# (Python >= 3.11), and everything else is `json` + `urllib` from the stdlib. No
+# third-party runtime deps.
+#
+# The single guarded fallback below pulls `tomli` *only* on an older interpreter,
+# so an `import tomllib` / `import tomli as tomllib` shim has a backend everywhere
+# without adding a dependency on a modern Python.
+tomli>=2.0 ; python_version < "3.11"
