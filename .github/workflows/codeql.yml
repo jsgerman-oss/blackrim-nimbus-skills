@@ -1,0 +1,43 @@
+name: CodeQL
+
+# First-party static analysis (CodeQL) for JavaScript/TypeScript. Public repos
+# with source; private repos would need GitHub Advanced Security. Add only to
+# repos that actually contain JS/TS, or init fails with "no source code found".
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: '47 4 * * 1'  # weekly, Monday 04:47 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: CodeQL analyze
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript-typescript]
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4.36.2
+        with:
+          language: ${{ matrix.language }}
+      - name: Analyze
+        uses: github/codeql-action/analyze@v4.36.2
+        with:
+          category: "/language:${{ matrix.language }}"

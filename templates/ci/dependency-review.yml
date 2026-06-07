@@ -1,0 +1,24 @@
+name: Dependency Review
+
+# Blocks pull requests that introduce known-vulnerable or license-incompatible
+# dependencies. Public repos only: dependency review needs GitHub Advanced
+# Security on private repositories.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v5.0.0
