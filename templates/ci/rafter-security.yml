@@ -1,0 +1,28 @@
+name: Rafter Security Scan
+
+# Secret-scanning gate via the Rafter CLI. Runs offline with no credentials.
+# The pinned action version is kept current by Dependabot (.github/dependabot.yml).
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: '17 4 * * 1'  # weekly on Monday at 04:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafter-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Rafter Security Scan
+        uses: Raftersecurity/rafter-cli@v0.8.4

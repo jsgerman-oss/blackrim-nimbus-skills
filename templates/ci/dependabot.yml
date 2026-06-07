@@ -1,0 +1,7 @@
+version: 2
+updates:
+  # Keep pinned GitHub Actions current, including Raftersecurity/rafter-cli.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
