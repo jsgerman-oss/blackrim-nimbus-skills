@@ -1,0 +1,35 @@
+name: Fallow
+
+# Codebase intelligence: dead code, duplication, complexity/health, and a
+# changed-file quality gate. Local AST/static analysis, no credentials needed
+# (cloud mode via FALLOW_API_KEY + --cloud is optional). Report mode keeps the
+# build green while findings are reviewed; drop continue-on-error to enforce.
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: '53 4 * * 1'  # weekly, Monday 04:53 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fallow-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fallow:
+    name: Codebase intelligence
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Fallow
+        continue-on-error: true
+        uses: fallow-rs/fallow@v2.89.0
