@@ -1,0 +1,36 @@
+name: Semgrep
+
+# Static analysis with Semgrep OSS rulesets (no account or token). Report mode:
+# the scan prints findings and continue-on-error keeps the build green while
+# they are triaged. Add --error and drop continue-on-error to enforce.
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: '29 4 * * 1'  # weekly, Monday 04:29 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semgrep-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  semgrep:
+    name: Semgrep scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Semgrep
+        run: pip install --quiet semgrep
+      - name: Semgrep scan (report mode)
+        continue-on-error: true
+        run: semgrep scan --config p/default --metrics off

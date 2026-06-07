@@ -1,0 +1,40 @@
+name: OSV Scanner
+
+# Dependency-vulnerability scan against the OSV database. Report mode:
+# continue-on-error surfaces findings without failing the build, so vulnerable
+# deps stay visible while grouped Dependabot patches them. Remove
+# continue-on-error to enforce once the baseline is clean.
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: '23 4 * * 1'  # weekly, Monday 04:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: osv-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    name: OSV vulnerability scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: OSV-Scanner
+        continue-on-error: true
+        uses: google/osv-scanner-action@v2.3.8
+        with:
+          scan-args: |-
+            -r
+            --skip-git
+            ./
