@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Hosting pack / the golden path / blackrim-nimbus</title>
+    <meta
+      name="description"
+      content="nimbus is the city-side GasCity pack that makes a town app-hosting capable: an agent scaffolds a web app on the golden path (vite, voidzero, Cloudflare, Convex) and deploys it to any of 19 clouds."
+    />
+    <meta property="og:title" content="Hosting pack / the golden path / blackrim-nimbus" />
+    <meta property="og:description" content="The GasCity hosting pack: scaffold a web app on the golden path and deploy it to any of 19 clouds." />
+    <meta property="og:type" content="website" />
+    <script>
+      (function () {
+        try {
+          var q = new URLSearchParams(location.search).get('theme');
+          var stored = localStorage.getItem('nimbus-theme');
+          var pref = q === 'light' || q === 'dark' ? q : stored;
+          var dark = pref ? pref === 'dark' : true;
+          var r = document.documentElement;
+          r.classList.remove('dark', 'light');
+          r.classList.add(dark ? 'dark' : 'light');
+          r.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav" aria-label="Primary">
+      <div class="shell nav-inner">
+        <a class="brand" href="../" aria-label="blackrim-nimbus, home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="currentColor" stroke-opacity="0.4" />
+            <path d="M8 10.5 L13.5 16 L8 21.5" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="square" />
+            <path d="M22 22 L22 13 M18.8 16.2 L22 13 L25.2 16.2" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="square" />
+          </svg>
+          <span class="wordmark">blackrim<span class="wordmark-accent">-nimbus</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Sections">
+          <a class="nav-link" href="../providers/">Providers</a>
+          <a class="nav-link" href="./" aria-current="page">Hosting pack</a>
+          <a class="nav-link" href="../#golden-path">Golden path</a>
+        </nav>
+
+        <div class="nav-cta">
+          <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">
+            <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" stroke-linejoin="round" /></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round" /></svg>
+          </button>
+          <a class="ghost-btn" href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.25-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.4 4.6-4.6 4.9.3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2z" /></svg>
+            <span>GitHub</span>
+          </a>
+          <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+        <a class="mobile-link" href="../providers/">Providers</a>
+        <a class="mobile-link" href="./">Hosting pack</a>
+        <a class="mobile-link" href="../#golden-path">Golden path</a>
+        <a class="mobile-link" href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-head">
+        <div class="hero-field" aria-hidden="true"></div>
+        <div class="shell page-head-inner">
+          <p class="eyebrow">Hosting pack</p>
+          <h1>Scaffold an app. Deploy it. One golden path.</h1>
+          <p>
+            <code>nimbus</code> is the city-side GasCity pack that makes a town app-hosting capable.
+            An agent scaffolds a new web app on the golden path and deploys it end to end, then
+            reaches for any of the 19 clouds when the job calls for it. Stdlib-only Python: no overlay,
+            no hooks, no prompt fragments.
+          </p>
+          <div class="hero-cta">
+            <a class="btn-primary" href="https://github.com/jsgerman-oss/blackrim-nimbus-skills/tree/main/pack" target="_blank" rel="noreferrer">
+              Read the pack source
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="square" /></svg>
+            </a>
+            <a class="btn-ghost" href="../providers/">Compare the 19 clouds</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== THE GOLDEN PATH ===================== -->
+      <section class="section">
+        <div class="shell">
+          <div class="section-head">
+            <p class="eyebrow">The golden path</p>
+            <h2>vite, voidzero, Cloudflare, Convex.</h2>
+            <p>
+              The build chain, the deploy target, and the data layer, chosen so they fit together
+              without configuration. One command per step, typed end to end.
+            </p>
+          </div>
+          <div class="goldenpath" data-reveal="stagger" data-reveal-stagger="80">
+            <article class="stage">
+              <span class="stage-step">01</span>
+              <h3>Vite</h3>
+              <p class="stage-role">Scaffold</p>
+              <p><code>npm create vite</code>. Instant dev server, first-class TypeScript, the front door to the toolchain.</p>
+            </article>
+            <article class="stage">
+              <span class="stage-step">02</span>
+              <h3>voidzero</h3>
+              <p class="stage-role">Build</p>
+              <p>Vite, Rolldown, and Oxc: one Rust-grade toolchain that lints, bundles, and tests.</p>
+            </article>
+            <article class="stage">
+              <span class="stage-step">03</span>
+              <h3>Cloudflare</h3>
+              <p class="stage-role">Deploy</p>
+              <p><code>wrangler deploy</code> ships to Workers and Pages at the edge, global by default.</p>
+            </article>
+            <article class="stage">
+              <span class="stage-step">04</span>
+              <h3>Convex</h3>
+              <p class="stage-role">Data</p>
+              <p><code>convex deploy</code> gives you a reactive, typed backend: queries, mutations, live state.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== WHAT IT PROVIDES ===================== -->
+      <section class="section">
+        <div class="shell pack-grid">
+          <div class="prose" data-reveal>
+            <p class="eyebrow">What it provides</p>
+            <h2>A small, runnable enabler.</h2>
+            <p>
+              The pack is the runnable companion to the 19 per-provider plugins. Those teach Claude
+              each cloud's well-architected defaults; the pack turns that into a golden path plus
+              breadth across all 19 clouds.
+            </p>
+            <table class="spec-table">
+              <thead>
+                <tr><th>Path</th><th>Role</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>bin/nimbus</code></td><td>The app-scaffold and deploy CLI.</td></tr>
+                <tr><td><code>nimbus/</code></td><td>The engine, pure standard library.</td></tr>
+                <tr><td><code>skills/golden-path-hosting/</code></td><td>The golden-path deploy skill.</td></tr>
+                <tr><td><code>docs/DESIGN.md</code></td><td>The pack's design and scope.</td></tr>
+              </tbody>
+            </table>
+            <p>
+              Stdlib-only, on <code>tomllib</code> with a <code>tomli</code> fallback. It mirrors the
+              minimal footprint of <code>gascity-cockpit</code> and <code>provider-forge</code>.
+            </p>
+          </div>
+
+          <div class="pack-side" data-reveal>
+            <div class="codeblock">
+              <div class="codeblock-head">quickstart</div>
+              <pre><span class="tok-comment"># build the engine venv (optional)</span>
+<span class="tok-cmd">./setup.sh</span>
+
+<span class="tok-comment"># what is this pack, what lands where?</span>
+<span class="tok-cmd">./bin/nimbus info</span>
+
+<span class="tok-comment"># version, text or JSON</span>
+<span class="tok-cmd">./bin/nimbus version</span> <span class="tok-flag">--json</span></pre>
+            </div>
+            <p class="side-note">
+              The scaffold CLI ships <code>version</code> and <code>info</code> today. Scaffold a new
+              app on the golden path and deploy it to one of 19 clouds lands next.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== INSTALL INTO A CITY ===================== -->
+      <section class="section">
+        <div class="shell">
+          <div class="section-head">
+            <p class="eyebrow">Install into a city</p>
+            <h2>Vendor it, register it, reload.</h2>
+            <p>
+              Drop <code>pack/</code> into the target city as <code>packs/nimbus/</code>, then install
+              at town or rig scope. It registers a direct <code>source = "packs/nimbus"</code> import
+              (the gastown pattern), runs <code>gc reload</code>, and verifies.
+            </p>
+          </div>
+          <div class="codeblock">
+            <div class="codeblock-head">packs/nimbus</div>
+            <pre><span class="tok-comment"># city-wide</span>
+<span class="tok-cmd">packs/nimbus/install.sh</span> <span class="tok-flag">--town</span>
+
+<span class="tok-comment"># one rig</span>
+<span class="tok-cmd">packs/nimbus/install.sh</span> <span class="tok-flag">--rig &lt;name&gt;</span>
+
+<span class="tok-comment"># preview without writing</span>
+<span class="tok-cmd">packs/nimbus/install.sh</span> <span class="tok-flag">--town --dry-run</span>
+
+<span class="tok-comment"># reverse it (--purge to drop the venv)</span>
+<span class="tok-cmd">packs/nimbus/uninstall.sh</span> <span class="tok-flag">--town</span></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CTA ===================== -->
+      <section class="section cta-section">
+        <div class="shell cta-inner">
+          <p class="eyebrow">Breadth plus a default</p>
+          <h2>One path to start, nineteen clouds to grow.</h2>
+          <p>
+            Start on the golden path, reach for any cloud when you need it, and keep the same
+            well-architected defaults the whole way.
+          </p>
+          <div class="hero-cta">
+            <a class="btn-primary" href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">
+              Get it on GitHub
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="square" /></svg>
+            </a>
+            <a class="btn-ghost" href="../providers/">Open the cloud matrix</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell foot-inner">
+        <div class="foot-brand">
+          <a class="brand" href="../">
+            <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+              <rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="currentColor" stroke-opacity="0.4" />
+              <path d="M8 10.5 L13.5 16 L8 21.5" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="square" />
+              <path d="M22 22 L22 13 M18.8 16.2 L22 13 L25.2 16.2" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="square" />
+            </svg>
+            <span class="wordmark">blackrim<span class="wordmark-accent">-nimbus</span></span>
+          </a>
+          <p class="foot-tag">
+            Nineteen cloud toolkits for Claude Code, plus a GasCity hosting pack and the
+            <code>vite + voidzero + cloudflare + convex</code> golden path.
+          </p>
+        </div>
+        <nav class="foot-cols" aria-label="Footer">
+          <div class="foot-col">
+            <span class="foot-col-head">Marketplace</span>
+            <a href="../providers/">Providers</a>
+            <a href="./">Hosting pack</a>
+            <a href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">Repository</a>
+          </div>
+          <div class="foot-col">
+            <span class="foot-col-head">Golden path</span>
+            <a href="https://voidzero.dev" target="_blank" rel="noreferrer">voidzero</a>
+            <a href="https://developers.cloudflare.com" target="_blank" rel="noreferrer">Cloudflare</a>
+            <a href="https://www.convex.dev" target="_blank" rel="noreferrer">Convex</a>
+          </div>
+        </nav>
+      </div>
+      <div class="shell foot-base">
+        <span>Built for <a href="https://claude.com/claude-code" target="_blank" rel="noreferrer">Claude Code</a>, on Gas City.</span>
+        <span class="dim">MIT licensed &middot; 19 clouds</span>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

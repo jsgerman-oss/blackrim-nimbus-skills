@@ -1,0 +1,493 @@
+/* =========================================================================
+   Signature surfaces: hero + halo, the golden-path deploy terminal,
+   the golden-path stage flow, and the cloud matrix (instrument-panel hover).
+   The halo is reserved for the hero (and its terminal). Nothing else glows.
+   ========================================================================= */
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 8vw, 7rem) clamp(4rem, 9vw, 8rem);
+}
+.hero-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(120% 90% at 72% 0%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(120% 90% at 72% 0%, #000 0%, transparent 70%);
+}
+.hero-field::after {
+  content: '';
+  position: absolute;
+  top: -25%;
+  right: -10%;
+  width: 50rem;
+  height: 50rem;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 60%);
+  pointer-events: none;
+  animation: breathe 9s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-field::after {
+    animation: none;
+  }
+}
+
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+.hero-title {
+  font-size: var(--text-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  margin-top: 1.25rem;
+  max-width: 15ch;
+}
+.hero-title .accent-line {
+  color: var(--accent);
+}
+.hero-lede {
+  margin-top: 1.75rem;
+  max-width: 54ch;
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  color: var(--ink);
+}
+.hero-lede code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent);
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.25rem;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.25rem;
+  margin-top: 3rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--hairline);
+}
+.hero-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.hero-meta dt {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+.hero-meta dd {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+.hero-art {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+/* staged hero reveal - ends at the natural state (static + reduced-motion safe) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-copy > * {
+  animation: rise 0.7s var(--ease-out-expo) backwards;
+}
+.hero-copy > :nth-child(1) {
+  animation-delay: 0.04s;
+}
+.hero-copy > :nth-child(2) {
+  animation-delay: 0.11s;
+}
+.hero-copy > :nth-child(3) {
+  animation-delay: 0.19s;
+}
+.hero-copy > :nth-child(4) {
+  animation-delay: 0.27s;
+}
+.hero-copy > :nth-child(5) {
+  animation-delay: 0.35s;
+}
+.hero-art {
+  animation: rise 0.9s var(--ease-out-expo) 0.28s backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > *,
+  .hero-art {
+    animation: none;
+  }
+}
+
+@media (max-width: 940px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .hero-art {
+    justify-content: flex-start;
+  }
+  .hero-title {
+    max-width: 18ch;
+  }
+}
+
+/* ---- The golden-path deploy terminal (the only haloed element) ---- */
+.terminal {
+  width: 100%;
+  max-width: 38rem;
+  border: 1px solid var(--hairline-strong);
+  background: color-mix(in oklab, var(--surface) 86%, var(--bg));
+  box-shadow:
+    0 0 0 1px var(--halo-ring),
+    0 30px 80px -40px var(--glow),
+    0 1px 0 0 color-mix(in oklab, var(--ink) 6%, transparent) inset;
+  font-family: var(--font-mono);
+  overflow: hidden;
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+  background: color-mix(in oklab, var(--bg) 55%, var(--surface));
+}
+.terminal-dots {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+.terminal-dots i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--d);
+}
+.terminal-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+.terminal-live {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal-green);
+}
+.terminal-live i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal-green);
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--signal-green) 70%, transparent);
+  animation: live-pulse 2.4s ease-out infinite;
+}
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--signal-green) 60%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.terminal-body {
+  margin: 0;
+  padding: 1.1rem 1.15rem 1.35rem;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--mute);
+  overflow-x: auto;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+.t-line {
+  display: block;
+}
+/* JS stages the reveal; this from-state is added by JS only, so the static
+   render always shows the full transcript. */
+.terminal[data-staged='true'] .t-line {
+  opacity: 0;
+  transform: translateY(3px);
+}
+.terminal[data-staged='true'] .t-line.is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.28s var(--ease-out-quart),
+    transform 0.28s var(--ease-out-quart);
+}
+.t-prompt {
+  color: var(--accent);
+}
+.t-cmd {
+  color: var(--ink);
+}
+.t-flag {
+  color: var(--signal-amber);
+}
+.t-url {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--accent) 40%, transparent);
+  text-underline-offset: 2px;
+}
+.t-ok {
+  color: var(--signal-green);
+}
+.t-warn {
+  color: var(--signal-amber);
+}
+.t-dim {
+  color: var(--caption);
+}
+.caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.05em;
+  margin-left: 0.1em;
+  translate: 0 0.18em;
+  background: var(--accent);
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .caret {
+    animation: none;
+  }
+  .terminal-live i {
+    animation: none;
+  }
+}
+
+/* ---- Golden-path stage flow ---- */
+.goldenpath {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+.stage {
+  position: relative;
+  background: var(--surface);
+  padding: clamp(1.35rem, 2.4vw, 1.85rem);
+  transition: background 160ms ease;
+}
+.stage:hover {
+  background: var(--lifted);
+}
+.stage-step {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.stage h3 {
+  font-size: 1.15rem;
+  margin-top: 0.7rem;
+}
+.stage .stage-role {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-top: 0.2rem;
+}
+.stage p {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  color: var(--mute);
+}
+.stage:not(:last-child)::after {
+  content: '>';
+  position: absolute;
+  right: -0.62rem;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+  background: var(--bg);
+  padding-block: 0.3rem;
+}
+@media (max-width: 860px) {
+  .goldenpath {
+    grid-template-columns: 1fr;
+  }
+  .stage:not(:last-child)::after {
+    content: 'v';
+    right: 50%;
+    top: auto;
+    bottom: -0.7rem;
+    translate: 50% 0;
+    padding-inline: 0.3rem;
+    padding-block: 0;
+  }
+}
+
+/* ---- The cloud matrix (connected hairline grid, instrument-panel hover) ---- */
+.matrix {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 9.5rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+  background: var(--surface);
+  transition:
+    background 300ms var(--ease-out-quart),
+    opacity 300ms var(--ease-out-quart);
+}
+.cell-label {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.cell-best {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--mute);
+}
+.cell-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.cell-tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+.cell-path {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+/* golden-path cloud: lit by default (the selected channel) */
+.cell[data-path='golden'] {
+  background: color-mix(in oklab, var(--accent) 9%, var(--surface));
+}
+.cell[data-path='golden'] .cell-path {
+  opacity: 1;
+}
+.cell[data-path='golden']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in oklab, var(--accent) 45%, transparent);
+  pointer-events: none;
+}
+
+/* instrument-panel hover: light one, recede the rest (blackrim :has() pattern) */
+.matrix:has(.cell:hover) .cell {
+  opacity: 0.42;
+}
+.matrix:has(.cell:hover) .cell:hover {
+  opacity: 1;
+  background: color-mix(in oklab, var(--accent) 12%, var(--lifted));
+}
+.matrix:has(.cell:hover) .cell:hover .cell-path {
+  opacity: 1;
+}
+.cell:hover .cell-label {
+  color: var(--accent);
+}
+.cell:focus-within {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .matrix {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 760px) {
+  .matrix {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 460px) {
+  .matrix {
+    grid-template-columns: 1fr;
+  }
+}
+/* On touch (no real hover), don't leave the panel dimmed. */
+@media (hover: none) {
+  .matrix:has(.cell:hover) .cell {
+    opacity: 1;
+  }
+}

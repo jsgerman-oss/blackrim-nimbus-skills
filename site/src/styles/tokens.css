@@ -1,0 +1,86 @@
+/* =========================================================================
+   blackrim-nimbus - design tokens
+   System: blackrim "Working Lab Notebook" (Inter + JetBrains Mono, square
+   corners, 1px hairline structure, flat-by-default) carried over wholesale,
+   with nimbus's own VAPOR CYAN accent (hue ~200) in place of Armada Blue.
+   Reasoned in OKLCH. Two themes: dark is primary, light is full fidelity.
+   Values track site/DESIGN.md frontmatter.
+   ========================================================================= */
+
+:root {
+  /* nimbus signature accent - vapor cyan (cloud edge, the instant a deploy goes live) */
+  --vapor: oklch(0.76 0.15 200);
+  --vapor-lift: oklch(0.83 0.13 200);
+  --vapor-deep: oklch(0.54 0.12 204);
+
+  /* runtime-signal colors - used ONLY in terminal / status contexts, never decoration */
+  --signal-amber: oklch(0.82 0.14 76);
+  --signal-red: oklch(0.68 0.2 22);
+  --signal-green: oklch(0.88 0.18 158);
+
+  /* macOS traffic lights - literal quotation, never rebranded */
+  --mac-red: #ff5f57;
+  --mac-amber: #febc2e;
+  --mac-green: #28c840;
+
+  /* type */
+  --font-sans: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  /* fluid display scale - ratio >= 1.25, hero ceiling ~84px */
+  --text-display: clamp(2.75rem, 1.6rem + 5.4vw, 5.25rem);
+  --text-headline: clamp(2rem, 1.3rem + 3.2vw, 3.5rem);
+  --text-title: clamp(1.5rem, 1.2rem + 1.6vw, 2.25rem);
+  --text-lead: clamp(1.125rem, 1.02rem + 0.7vw, 1.375rem);
+
+  /* easing - ease-out-expo / quart, no bounce */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* radii - square everywhere, 4px only for code */
+  --radius-none: 0;
+  --radius-code: 4px;
+
+  /* semantic z-scale */
+  --z-sticky: 30;
+  --z-nav: 40;
+  --z-overlay: 50;
+  --z-skip: 100;
+}
+
+/* ---- Dark theme (primary) ---- */
+:root,
+.dark {
+  --bg: oklch(0.15 0.012 215);
+  --surface: oklch(0.188 0.016 214);
+  --lifted: oklch(0.236 0.02 213);
+  --hairline: oklch(0.31 0.018 215);
+  --hairline-strong: oklch(0.42 0.026 215);
+  --ink: oklch(0.975 0.006 220);
+  --mute: oklch(0.745 0.026 220);
+  --caption: oklch(0.57 0.03 222);
+  --accent: var(--vapor);
+  --accent-strong: var(--vapor-lift);
+  --grid-line: oklch(0.76 0.15 200 / 0.05);
+  --halo-ring: oklch(0.76 0.15 200 / 0.1);
+  --glow: oklch(0.76 0.15 200 / 0.16);
+  color-scheme: dark;
+}
+
+/* ---- Light theme (full fidelity, not an afterthought) ---- */
+.light {
+  --bg: oklch(0.976 0.005 95);
+  --surface: oklch(0.945 0.006 95);
+  --lifted: oklch(0.915 0.009 95);
+  --hairline: oklch(0.86 0.01 95);
+  --hairline-strong: oklch(0.76 0.015 95);
+  --ink: oklch(0.22 0.02 215);
+  --mute: oklch(0.41 0.03 222);
+  --caption: oklch(0.55 0.03 222);
+  --accent: oklch(0.55 0.15 206);
+  --accent-strong: oklch(0.49 0.15 206);
+  --grid-line: oklch(0.55 0.15 206 / 0.06);
+  --halo-ring: oklch(0.55 0.15 206 / 0.14);
+  --glow: oklch(0.55 0.15 206 / 0.12);
+  color-scheme: light;
+}

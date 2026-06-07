@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Providers / the cloud matrix / blackrim-nimbus</title>
+    <meta
+      name="description"
+      content="The 19 clouds of blackrim-nimbus as a connected matrix: hyperscalers, edge platforms, app platforms, and regional clouds. Cloudflare is lit as the golden-path deploy target."
+    />
+    <meta property="og:title" content="Providers / the cloud matrix / blackrim-nimbus" />
+    <meta property="og:description" content="19 cloud toolkits for Claude Code, with Cloudflare lit as the golden-path deploy target." />
+    <meta property="og:type" content="website" />
+    <script>
+      (function () {
+        try {
+          var q = new URLSearchParams(location.search).get('theme');
+          var stored = localStorage.getItem('nimbus-theme');
+          var pref = q === 'light' || q === 'dark' ? q : stored;
+          var dark = pref ? pref === 'dark' : true;
+          var r = document.documentElement;
+          r.classList.remove('dark', 'light');
+          r.classList.add(dark ? 'dark' : 'light');
+          r.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav" aria-label="Primary">
+      <div class="shell nav-inner">
+        <a class="brand" href="../" aria-label="blackrim-nimbus, home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="currentColor" stroke-opacity="0.4" />
+            <path d="M8 10.5 L13.5 16 L8 21.5" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="square" />
+            <path d="M22 22 L22 13 M18.8 16.2 L22 13 L25.2 16.2" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="square" />
+          </svg>
+          <span class="wordmark">blackrim<span class="wordmark-accent">-nimbus</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Sections">
+          <a class="nav-link" href="./" aria-current="page">Providers</a>
+          <a class="nav-link" href="../pack/">Hosting pack</a>
+          <a class="nav-link" href="../#golden-path">Golden path</a>
+        </nav>
+
+        <div class="nav-cta">
+          <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">
+            <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" stroke-linejoin="round" /></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round" /></svg>
+          </button>
+          <a class="ghost-btn" href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.25-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.4 4.6-4.6 4.9.3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2z" /></svg>
+            <span>GitHub</span>
+          </a>
+          <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+        <a class="mobile-link" href="./">Providers</a>
+        <a class="mobile-link" href="../pack/">Hosting pack</a>
+        <a class="mobile-link" href="../#golden-path">Golden path</a>
+        <a class="mobile-link" href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-head">
+        <div class="hero-field" aria-hidden="true"></div>
+        <div class="shell page-head-inner">
+          <p class="eyebrow">The matrix</p>
+          <h1>Nineteen clouds, one muscle memory.</h1>
+          <p>
+            One connected panel, one cell per cloud. Each toolkit ships the same six skills and two
+            agents, so the nineteenth cloud feels like the first. Hover a cell to bring it forward;
+            Cloudflare stays lit as the golden-path deploy target.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="matrix-legend">
+            <span class="legend-item"><span class="legend-swatch is-golden"></span> Golden-path target</span>
+            <span class="legend-item"><span class="legend-swatch"></span> Available toolkit</span>
+            <span class="legend-item">Hover to select a channel; the rest recede.</span>
+          </div>
+
+          <div class="matrix" data-reveal>
+            <article class="cell" data-provider="cloudflare" data-path="golden">
+              <span class="cell-label">Cloudflare</span>
+              <p class="cell-best">Edge Workers, R2, D1, Pages. The golden-path deploy target.</p>
+              <div class="cell-foot"><span class="cell-tag">Edge</span><span class="cell-path">Golden path</span></div>
+            </article>
+            <article class="cell" data-provider="vercel">
+              <span class="cell-label">Vercel</span>
+              <p class="cell-best">Next.js, Edge Functions, ISR, KV, Blob, and Postgres.</p>
+              <div class="cell-foot"><span class="cell-tag">Frontend</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="netlify">
+              <span class="cell-label">Netlify</span>
+              <p class="cell-best">Builds, Edge Functions, Blobs, Forms, deploy previews.</p>
+              <div class="cell-foot"><span class="cell-tag">Frontend</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="supabase">
+              <span class="cell-label">Supabase</span>
+              <p class="cell-best">Postgres, Auth, RLS, Storage, Realtime, pgvector.</p>
+              <div class="cell-foot"><span class="cell-tag">Backend</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="fly">
+              <span class="cell-label">Fly.io</span>
+              <p class="cell-best">Machines at the edge, scale to zero, global Postgres.</p>
+              <div class="cell-foot"><span class="cell-tag">Edge</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="railway">
+              <span class="cell-label">Railway</span>
+              <p class="cell-best">Services, volumes, cron, and PR preview deploys.</p>
+              <div class="cell-foot"><span class="cell-tag">PaaS</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="render">
+              <span class="cell-label">Render</span>
+              <p class="cell-best">Web services, workers, cron, managed Postgres.</p>
+              <div class="cell-foot"><span class="cell-tag">PaaS</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="digitalocean">
+              <span class="cell-label">DigitalOcean</span>
+              <p class="cell-best">Droplets, App Platform, DOKS, and Spaces.</p>
+              <div class="cell-foot"><span class="cell-tag">Cloud</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="aws">
+              <span class="cell-label">AWS</span>
+              <p class="cell-best">Lambda, ECS, and the deep well-architected core.</p>
+              <div class="cell-foot"><span class="cell-tag">Hyperscale</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="gcp">
+              <span class="cell-label">GCP</span>
+              <p class="cell-best">Cloud Run, GKE, BigQuery, global networking.</p>
+              <div class="cell-foot"><span class="cell-tag">Hyperscale</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="azure">
+              <span class="cell-label">Azure</span>
+              <p class="cell-best">App Service, AKS, Functions, enterprise identity.</p>
+              <div class="cell-foot"><span class="cell-tag">Hyperscale</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="oci">
+              <span class="cell-label">OCI</span>
+              <p class="cell-best">Compute, OKE, Autonomous Database, generous egress.</p>
+              <div class="cell-foot"><span class="cell-tag">Enterprise</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="ibm">
+              <span class="cell-label">IBM Cloud</span>
+              <p class="cell-best">VPC, Code Engine, OpenShift, and watsonx.</p>
+              <div class="cell-foot"><span class="cell-tag">Enterprise</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="linode">
+              <span class="cell-label">Linode</span>
+              <p class="cell-best">Compute, LKE, object storage, managed databases.</p>
+              <div class="cell-foot"><span class="cell-tag">Cloud</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="vultr">
+              <span class="cell-label">Vultr</span>
+              <p class="cell-best">Cloud compute, bare metal, VKE, block storage.</p>
+              <div class="cell-foot"><span class="cell-tag">Cloud</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="hetzner">
+              <span class="cell-label">Hetzner</span>
+              <p class="cell-best">Cloud servers and Robot dedicated, price per core.</p>
+              <div class="cell-foot"><span class="cell-tag">Cloud</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="scaleway">
+              <span class="cell-label">Scaleway</span>
+              <p class="cell-best">EU residency, Kapsule, serverless containers.</p>
+              <div class="cell-foot"><span class="cell-tag">EU</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="alibaba">
+              <span class="cell-label">Alibaba Cloud</span>
+              <p class="cell-best">ECS, ACK, Function Compute, APAC and China.</p>
+              <div class="cell-foot"><span class="cell-tag">APAC</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+            <article class="cell" data-provider="tencent">
+              <span class="cell-label">Tencent Cloud</span>
+              <p class="cell-best">CVM, TKE, SCF, COS, APAC and China.</p>
+              <div class="cell-foot"><span class="cell-tag">APAC</span><span class="cell-path">6 skills, 2 agents</span></div>
+            </article>
+          </div>
+
+          <div class="goldenband" data-reveal>
+            <span class="goldenband-label">Golden path</span>
+            <div class="goldenband-flow">
+              <span>vite</span><span class="sep">&rsaquo;</span>
+              <span>voidzero</span><span class="sep">&rsaquo;</span>
+              <span>Cloudflare</span><span class="sep">&rsaquo;</span>
+              <span>Convex</span>
+              <span class="muted">
+                The breadth is the option set. The golden path is the default: scaffold with Vite,
+                build with voidzero, deploy to Cloudflare, and back it with Convex.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cta-section">
+        <div class="shell cta-inner">
+          <p class="eyebrow">Pick a cloud</p>
+          <h2>Install one toolkit, or all nineteen.</h2>
+          <p>
+            Add the marketplace to Claude Code, install the clouds you run, and let the right skill
+            fire when a question is shaped like that cloud.
+          </p>
+          <div class="hero-cta">
+            <a class="btn-primary" href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">
+              Get it on GitHub
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="square" /></svg>
+            </a>
+            <a class="btn-ghost" href="../pack/">See the hosting pack</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell foot-inner">
+        <div class="foot-brand">
+          <a class="brand" href="../">
+            <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+              <rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="currentColor" stroke-opacity="0.4" />
+              <path d="M8 10.5 L13.5 16 L8 21.5" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="square" />
+              <path d="M22 22 L22 13 M18.8 16.2 L22 13 L25.2 16.2" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="square" />
+            </svg>
+            <span class="wordmark">blackrim<span class="wordmark-accent">-nimbus</span></span>
+          </a>
+          <p class="foot-tag">
+            Nineteen cloud toolkits for Claude Code, plus a GasCity hosting pack and the
+            <code>vite + voidzero + cloudflare + convex</code> golden path.
+          </p>
+        </div>
+        <nav class="foot-cols" aria-label="Footer">
+          <div class="foot-col">
+            <span class="foot-col-head">Marketplace</span>
+            <a href="./">Providers</a>
+            <a href="../pack/">Hosting pack</a>
+            <a href="https://github.com/jsgerman-oss/blackrim-nimbus-skills" target="_blank" rel="noreferrer">Repository</a>
+          </div>
+          <div class="foot-col">
+            <span class="foot-col-head">Golden path</span>
+            <a href="https://voidzero.dev" target="_blank" rel="noreferrer">voidzero</a>
+            <a href="https://developers.cloudflare.com" target="_blank" rel="noreferrer">Cloudflare</a>
+            <a href="https://www.convex.dev" target="_blank" rel="noreferrer">Convex</a>
+          </div>
+        </nav>
+      </div>
+      <div class="shell foot-base">
+        <span>Built for <a href="https://claude.com/claude-code" target="_blank" rel="noreferrer">Claude Code</a>, on Gas City.</span>
+        <span class="dim">MIT licensed &middot; 19 clouds</span>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
