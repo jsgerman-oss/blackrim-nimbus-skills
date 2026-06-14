@@ -28,7 +28,7 @@ jobs:
         with:
           egress-policy: audit
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install Semgrep
         run: pip install --quiet semgrep
       - name: Semgrep scan (report mode)

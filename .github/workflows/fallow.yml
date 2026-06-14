@@ -29,7 +29,7 @@ jobs:
         with:
           egress-policy: audit
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Fallow
         continue-on-error: true
-        uses: fallow-rs/fallow@v2.89.0
+        uses: fallow-rs/fallow@v2.96.0

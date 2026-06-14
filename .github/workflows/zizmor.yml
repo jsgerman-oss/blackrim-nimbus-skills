@@ -31,7 +31,7 @@ jobs:
         with:
           egress-policy: audit
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Run zizmor (report mode)
         continue-on-error: true
         env:
