@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Harden runner
         if: ${{ env.OPENAI_KEY != '' }}
-        uses: step-security/harden-runner@v2.19.4
+        uses: step-security/harden-runner@v2.20.0
         with:
           egress-policy: audit
       - name: PR Agent
@@ -31,4 +31,4 @@ jobs:
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: The-PR-Agent/pr-agent@v0.36.0
+        uses: The-PR-Agent/pr-agent@v0.39.0
