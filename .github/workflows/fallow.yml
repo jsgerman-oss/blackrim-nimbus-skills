@@ -25,11 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@v2.19.4
+        uses: step-security/harden-runner@v2.20.1
         with:
           egress-policy: audit
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Fallow
         continue-on-error: true
-        uses: fallow-rs/fallow@v2.89.0
+        uses: fallow-rs/fallow@v3.16.0
